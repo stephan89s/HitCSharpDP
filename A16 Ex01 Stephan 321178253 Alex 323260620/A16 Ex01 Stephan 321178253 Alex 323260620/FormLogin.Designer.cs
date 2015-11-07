@@ -118,7 +118,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(84)))), ((int)(((byte)(146)))));
-            this.ClientSize = new System.Drawing.Size(506, 243);
+            this.ClientSize = new System.Drawing.Size(233, 243);
             this.Controls.Add(this.labelRememberedUsers);
             this.Controls.Add(this.listBoxRememberedUsers);
             this.Controls.Add(this.buttonDeletFromUsersList);

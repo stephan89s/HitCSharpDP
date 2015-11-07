@@ -50,6 +50,7 @@
             this.textBoxPostStatus = new System.Windows.Forms.TextBox();
             this.labelUserName = new System.Windows.Forms.Label();
             this.pictureBoxUserSmallPicture = new System.Windows.Forms.PictureBox();
+            this.buttonLogOut = new System.Windows.Forms.Button();
             this.groupBoxFFilters.SuspendLayout();
             this.tabControlAllNews.SuspendLayout();
             this.tabPagePosts.SuspendLayout();
@@ -303,11 +304,22 @@
             this.pictureBoxUserSmallPicture.TabIndex = 15;
             this.pictureBoxUserSmallPicture.TabStop = false;
             // 
+            // buttonLogOut
+            // 
+            this.buttonLogOut.Location = new System.Drawing.Point(779, 12);
+            this.buttonLogOut.Name = "buttonLogOut";
+            this.buttonLogOut.Size = new System.Drawing.Size(121, 26);
+            this.buttonLogOut.TabIndex = 30;
+            this.buttonLogOut.Text = "LogOut";
+            this.buttonLogOut.UseVisualStyleBackColor = true;
+            this.buttonLogOut.Click += new System.EventHandler(this.buttonLogOut_Click);
+            // 
             // FormFacebookAccountBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(912, 733);
+            this.Controls.Add(this.buttonLogOut);
             this.Controls.Add(this.labelCheckIns);
             this.Controls.Add(this.listBoxCheckIns);
             this.Controls.Add(this.buttonRefreshTable);
@@ -360,5 +372,6 @@
         private System.Windows.Forms.TextBox textBoxPostStatus;
         private System.Windows.Forms.Label labelUserName;
         private System.Windows.Forms.PictureBox pictureBoxUserSmallPicture;
+        private System.Windows.Forms.Button buttonLogOut;
     }
 }

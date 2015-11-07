@@ -15,11 +15,12 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
     public partial class FormLogin : Form
     {
         public User LoggedInUser { get; set; }
+        public LoginResult result { get; set; }
         private bool isRememberUsersOpen = false;
         public FormLogin()
         {
             InitializeComponent();
-           
+
         }
 
         private void FormLogin_Load(object sender, EventArgs e)
@@ -29,7 +30,7 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
 
         private void buttonSlidePanel_Click(object sender, EventArgs e)
         {
-            const int k_RememberUsersFormWidthChange = 200;
+            const int k_RememberUsersFormWidthChange = 210;
             if (!isRememberUsersOpen)
             {
                 Width += k_RememberUsersFormWidthChange;
@@ -42,7 +43,7 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
                 Width -= k_RememberUsersFormWidthChange;
                 isRememberUsersOpen = false;
                 buttonRememberedUsers.Text = "Remembered Users >>";
-            }    
+            }
         }
 
         private void buttonLogin_Click(object sender, EventArgs e)
@@ -51,13 +52,13 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
         }
         private void loginAndInit()
         {
-            LoginResult result = FacebookService.Login("909882489077378", "user_birthday", "email", "user_hometown", "user_about_me", "user_photos", "publish_actions", "user_status", "user_tagged_places", "read_stream", "user_groups", "user_friends");
+            result = FacebookService.Login("909882489077378", "user_birthday", "email", "user_hometown", "user_about_me", "user_photos", "publish_actions", "user_status", "user_tagged_places", "user_friends");
             if (!string.IsNullOrEmpty(result.AccessToken))
             {
                 LoggedInUser = result.LoggedInUser;
                 this.Hide();
                 DialogResult facebookAccountResult = new FormFacebookAccountBoard(LoggedInUser).ShowDialog();
-
+                closeOrLogout(facebookAccountResult);
             }
             else
             {
@@ -66,6 +67,18 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
         }
         private void closeOrLogout(DialogResult i_facebookAccountResult)
         {
+            FacebookService.Logout(null);
+            switch (i_facebookAccountResult)
+            {
+                case DialogResult.Retry:
+                default:
+                    Show();
+                    break;
+                case DialogResult.Cancel:
+                    Close();
+                    break;
+            }
+
 
         }
 
