@@ -15,7 +15,7 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new FormLogin());
         }
     }
 }
