@@ -55,6 +55,7 @@
     <Compile Include="ApplicationComment.cs" />
     <Compile Include="ApplicationEvent.cs" />
     <Compile Include="ApplicationPost.cs" />
+    <Compile Include="ApplicationSettings.cs" />
     <Compile Include="FormCommentList.cs">
       <SubType>Form</SubType>
     </Compile>

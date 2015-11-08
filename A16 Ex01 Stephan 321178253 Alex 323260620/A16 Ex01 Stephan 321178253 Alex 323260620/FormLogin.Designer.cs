@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLogin));
             this.buttonLogin = new System.Windows.Forms.Button();
             this.buttonRememberedUsers = new System.Windows.Forms.Button();
-            this.checkBoxRememberNewUser = new System.Windows.Forms.CheckBox();
+            this.checkBoxRememberMe = new System.Windows.Forms.CheckBox();
             this.labelRememberedUsers = new System.Windows.Forms.Label();
             this.listBoxRememberedUsers = new System.Windows.Forms.ListBox();
             this.buttonDeletFromUsersList = new System.Windows.Forms.Button();
@@ -65,18 +65,18 @@
             this.buttonRememberedUsers.UseVisualStyleBackColor = false;
             this.buttonRememberedUsers.Click += new System.EventHandler(this.buttonRememberedUsers_Click);
             // 
-            // checkBoxRememberNewUser
+            // checkBoxRememberMe
             // 
-            this.checkBoxRememberNewUser.AutoSize = true;
-            this.checkBoxRememberNewUser.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(84)))), ((int)(((byte)(146)))));
-            this.checkBoxRememberNewUser.Font = new System.Drawing.Font("Arial", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBoxRememberNewUser.Location = new System.Drawing.Point(13, 78);
-            this.checkBoxRememberNewUser.Margin = new System.Windows.Forms.Padding(4);
-            this.checkBoxRememberNewUser.Name = "checkBoxRememberNewUser";
-            this.checkBoxRememberNewUser.Size = new System.Drawing.Size(149, 25);
-            this.checkBoxRememberNewUser.TabIndex = 6;
-            this.checkBoxRememberNewUser.Text = "Remember Me";
-            this.checkBoxRememberNewUser.UseVisualStyleBackColor = false;
+            this.checkBoxRememberMe.AutoSize = true;
+            this.checkBoxRememberMe.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(84)))), ((int)(((byte)(146)))));
+            this.checkBoxRememberMe.Font = new System.Drawing.Font("Arial", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxRememberMe.Location = new System.Drawing.Point(13, 78);
+            this.checkBoxRememberMe.Margin = new System.Windows.Forms.Padding(4);
+            this.checkBoxRememberMe.Name = "checkBoxRememberMe";
+            this.checkBoxRememberMe.Size = new System.Drawing.Size(149, 25);
+            this.checkBoxRememberMe.TabIndex = 6;
+            this.checkBoxRememberMe.Text = "Remember Me";
+            this.checkBoxRememberMe.UseVisualStyleBackColor = false;
             // 
             // labelRememberedUsers
             // 
@@ -122,7 +122,7 @@
             this.Controls.Add(this.labelRememberedUsers);
             this.Controls.Add(this.listBoxRememberedUsers);
             this.Controls.Add(this.buttonDeletFromUsersList);
-            this.Controls.Add(this.checkBoxRememberNewUser);
+            this.Controls.Add(this.checkBoxRememberMe);
             this.Controls.Add(this.buttonRememberedUsers);
             this.Controls.Add(this.buttonLogin);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -141,7 +141,7 @@
 
         private System.Windows.Forms.Button buttonLogin;
         private System.Windows.Forms.Button buttonRememberedUsers;
-        private System.Windows.Forms.CheckBox checkBoxRememberNewUser;
+        private System.Windows.Forms.CheckBox checkBoxRememberMe;
         private System.Windows.Forms.Label labelRememberedUsers;
         private System.Windows.Forms.ListBox listBoxRememberedUsers;
         private System.Windows.Forms.Button buttonDeletFromUsersList;

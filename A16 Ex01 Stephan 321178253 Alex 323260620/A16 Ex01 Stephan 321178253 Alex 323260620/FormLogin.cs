@@ -14,13 +14,13 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
 {
     public partial class FormLogin : Form
     {
-        public User LoggedInUser { get; set; }
-        public LoginResult result { get; set; }
-        private bool isRememberUsersOpen = false;
+        public User m_LoggedInUser { get; set; }
+        public LoginResult m_result { get; set; }
+        private bool m_isRememberUsersOpen = false;
         public FormLogin()
         {
             InitializeComponent();
-            FacebookService.s_CollectionLimit = 300;
+            FacebookService.s_CollectionLimit = 200;
         }
 
         private void FormLogin_Load(object sender, EventArgs e)
@@ -36,17 +36,17 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
         }
         private void loginAndInit()
         {
-            result = FacebookService.Login("909882489077378", "user_birthday", "email", "user_hometown", "user_about_me", "user_photos", "publish_actions", "user_status", "user_tagged_places", "user_friends");
-            if (!string.IsNullOrEmpty(result.AccessToken))
+            m_result = FacebookService.Login("909882489077378", "user_birthday", "email", "user_hometown", "user_about_me", "user_photos", "publish_actions", "user_status", "user_tagged_places", "user_friends");
+            if (!string.IsNullOrEmpty(m_result.AccessToken))
             {
-                LoggedInUser = result.LoggedInUser;
+                m_LoggedInUser = m_result.LoggedInUser;
                 this.Hide();
-                DialogResult facebookAccountResult = new FormFacebookAccountBoard(LoggedInUser).ShowDialog();
+                DialogResult facebookAccountResult = new FormFacebookAccountBoard(m_LoggedInUser).ShowDialog();
                 closeOrLogout(facebookAccountResult);
             }
             else
             {
-                MessageBox.Show(result.ErrorMessage);
+                MessageBox.Show(m_result.ErrorMessage);
             }
         }
         private void closeOrLogout(DialogResult i_facebookAccountResult)
@@ -69,19 +69,51 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
         private void buttonRememberedUsers_Click(object sender, EventArgs e)
         {
             const int k_RememberUsersFormWidthChange = 210;
-            if (!isRememberUsersOpen)
+            if (!m_isRememberUsersOpen)
             {
                 Width += k_RememberUsersFormWidthChange;
-                isRememberUsersOpen = true;
+                m_isRememberUsersOpen = true;
                 buttonRememberedUsers.Text = "<< Close Remembered Users";
 
             }
             else
             {
                 Width -= k_RememberUsersFormWidthChange;
-                isRememberUsersOpen = false;
+                m_isRememberUsersOpen = false;
                 buttonRememberedUsers.Text = "Remembered Users >>";
             }
         }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            base.OnClosing(e);
+            ApplicationSettings.Instance.AutoLogin = this.checkBoxRememberMe.Checked;
+            ApplicationSettings.Instance.Save();
+        }
+
+
+        protected override void OnShown(EventArgs e)
+        {
+            base.OnLoad(e);
+
+            
+            this.checkBoxRememberMe.Checked = ApplicationSettings.Instance.AutoLogin;
+
+            if (ApplicationSettings.Instance.AutoLogin)
+            {
+                autoLogin();
+            }
+        }
+
+        private void autoLogin()
+        {
+            LoginResult result = FacebookService.Connect(ApplicationSettings.Instance.AccessToken);
+            if (string.IsNullOrEmpty(result.ErrorMessage))
+            {
+                m_LoggedInUser = result.LoggedInUser;
+                
+            }
+        }
     }
+
 }
