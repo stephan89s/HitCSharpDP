@@ -13,16 +13,17 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
     public partial class FormFacebookAccountBoard : Form
     {
         public User LoggedInUser { get; set; }
-        public List<ApplicationPost> AppPostList { get; }
-        public List<ApplicationComment> selectedPostCommentsList;
+        public List<ApplicationPost> AppPostsList { get; }
+        public List<ApplicationEvent> AppEventsList { get; }
+        public List<ApplicationComment> m_selectedGridItemCommentsList;
         private bool m_isShowMoreInfoOpen = false;
-        Form m_ChosedCommentsForm;
+        FormCommentList m_ChosedCommentsForm;
         public FormFacebookAccountBoard(User i_LoggedInUser)
         {
             LoggedInUser = i_LoggedInUser;
             InitializeComponent();
-            AppPostList = new List<ApplicationPost>();
-          
+            AppPostsList = new List<ApplicationPost>();
+            AppEventsList = new List<ApplicationEvent>(); 
         }
         
 
@@ -50,26 +51,28 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
 
         private void dataGridViewPosts_SelectionChanged(object sender, EventArgs e)
         {
-            selectedPostCommentsList = new List<ApplicationComment>();
+            m_selectedGridItemCommentsList = new List<ApplicationComment>();
             int rowIndex = dataGridViewPosts.CurrentCell.RowIndex;
-            string postID = ((List<ApplicationPost>)dataGridViewPosts.DataSource)[rowIndex].getPostID();
+            string ItemID = ((List<ApplicationPost>)dataGridViewPosts.DataSource)[rowIndex].GetPublishedItemID();
 
-            foreach(var post in LoggedInUser.WallPosts)
+            foreach (var post in LoggedInUser.WallPosts)
             {
-                if(post.Id.Equals(postID))
+                if(post.Id.Equals(ItemID))
                 {
                     foreach (var comment in post.Comments)
                     {
-                        selectedPostCommentsList.Add(new ApplicationComment(comment));
+                        m_selectedGridItemCommentsList.Add(new ApplicationComment(comment));
                     }
                     break;
                 }
                 
             }
             
-                buttonComments.Enabled = selectedPostCommentsList.Count > 0? true : false;
-            buttonComments.Text = string.Format("Comments ({0})", selectedPostCommentsList.Count);
+                buttonComments.Enabled = m_selectedGridItemCommentsList.Count > 0? true : false;
+            buttonComments.Text = string.Format("Comments ({0})", m_selectedGridItemCommentsList.Count);
         }
+
+       
 
         private void buttonShowMoreInfo_Click(object sender, EventArgs e)
         {
@@ -115,6 +118,7 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
         protected override void OnShown(EventArgs e)
         {
             showPostsOnForm();
+            showEventsOnForm();
         }
 
 
@@ -123,16 +127,53 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
 
             foreach (var post in LoggedInUser.WallPosts)
             {
-                AppPostList.Add(new ApplicationPost(post));
+                AppPostsList.Add(new ApplicationPost(post));
 
             }
-            dataGridViewPosts.DataSource = AppPostList;
+            dataGridViewPosts.DataSource = AppPostsList;
+
+        }
+        private void showEventsOnForm()
+        {
+
+            foreach (var FBevent in LoggedInUser.Events )
+            {
+                AppEventsList.Add(new ApplicationEvent(FBevent));
+
+            }
+            dataGridViewEvents.DataSource = AppEventsList;
 
         }
 
         private void buttonComments_Click(object sender, EventArgs e)
         {
-           
+
+            m_ChosedCommentsForm = new FormCommentList(m_selectedGridItemCommentsList);
+           m_ChosedCommentsForm.ShowDialog();
+        }
+
+
+        private void dataGridViewTab_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (dataGridViewTab.SelectedTab.Name.Equals("tabPageEvents"))
+            {
+                buttonComments.Visible = false;
+            }
+            else if (dataGridViewTab.SelectedTab.Name.Equals("tabPagePosts"))
+            {
+                buttonComments.Visible = true;
+            }
+
+
+        }
+
+        private void buttonPostStatus_Click(object sender, EventArgs e)
+        {
+            if (textBoxPostStatus.Text.Length != 0)
+            {
+                LoggedInUser.PostStatus(textBoxPostStatus.Text);
+                textBoxPostStatus.Clear();
+            }
         }
     }
 

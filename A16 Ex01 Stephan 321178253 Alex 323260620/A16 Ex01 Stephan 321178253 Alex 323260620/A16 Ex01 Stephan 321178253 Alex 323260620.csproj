@@ -55,6 +55,12 @@
     <Compile Include="ApplicationComment.cs" />
     <Compile Include="ApplicationEvent.cs" />
     <Compile Include="ApplicationPost.cs" />
+    <Compile Include="FormCommentList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCommentList.Designer.cs">
+      <DependentUpon>FormCommentList.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormFacebookAccountBoard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -67,8 +73,12 @@
     <Compile Include="FormLogin.Designer.cs">
       <DependentUpon>FormLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="IPublishable.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormCommentList.resx">
+      <DependentUpon>FormCommentList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormFacebookAccountBoard.resx">
       <DependentUpon>FormFacebookAccountBoard.cs</DependentUpon>
     </EmbeddedResource>

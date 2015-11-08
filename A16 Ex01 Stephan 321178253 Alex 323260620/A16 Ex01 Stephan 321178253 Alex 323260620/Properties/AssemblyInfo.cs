@@ -34,3 +34,6 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: InternalsVisibleTo("A16 Ex01 Stephan 321178253 Alex 323260620.Tests")]
+[assembly: InternalsVisibleTo("A16 Ex01 Stephan 321178253 Alex 323260620.Explorables")]
+

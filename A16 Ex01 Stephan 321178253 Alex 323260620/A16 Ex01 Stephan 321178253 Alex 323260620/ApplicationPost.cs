@@ -6,7 +6,7 @@ using System.Text;
 
 namespace A16_Ex01_Stephan_321178253_Alex_323260620
 {
-    public class ApplicationPost
+    public class ApplicationPost : IPublishable
     {
         public string Message { get; }
         public string From { get; }
@@ -29,11 +29,10 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
             r_PostID = i_Post.Id;
         }
 
-        internal string getPostID()
+        public string GetPublishedItemID()
         {
             return r_PostID;
         }
-
     }
 }
 
