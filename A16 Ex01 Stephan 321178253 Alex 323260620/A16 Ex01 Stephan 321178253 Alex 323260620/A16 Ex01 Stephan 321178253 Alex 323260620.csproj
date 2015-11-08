@@ -52,6 +52,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationComment.cs" />
+    <Compile Include="ApplicationEvent.cs" />
+    <Compile Include="ApplicationPost.cs" />
     <Compile Include="FormFacebookAccountBoard.cs">
       <SubType>Form</SubType>
     </Compile>
