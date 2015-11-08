@@ -28,23 +28,7 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
 
         }
 
-        private void buttonSlidePanel_Click(object sender, EventArgs e)
-        {
-            const int k_RememberUsersFormWidthChange = 210;
-            if (!isRememberUsersOpen)
-            {
-                Width += k_RememberUsersFormWidthChange;
-                isRememberUsersOpen = true;
-                buttonRememberedUsers.Text = "<< Close Remembered Users";
-
-            }
-            else
-            {
-                Width -= k_RememberUsersFormWidthChange;
-                isRememberUsersOpen = false;
-                buttonRememberedUsers.Text = "Remembered Users >>";
-            }
-        }
+        
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
@@ -82,6 +66,22 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
 
         }
 
+        private void buttonRememberedUsers_Click(object sender, EventArgs e)
+        {
+            const int k_RememberUsersFormWidthChange = 210;
+            if (!isRememberUsersOpen)
+            {
+                Width += k_RememberUsersFormWidthChange;
+                isRememberUsersOpen = true;
+                buttonRememberedUsers.Text = "<< Close Remembered Users";
 
+            }
+            else
+            {
+                Width -= k_RememberUsersFormWidthChange;
+                isRememberUsersOpen = false;
+                buttonRememberedUsers.Text = "Remembered Users >>";
+            }
+        }
     }
 }

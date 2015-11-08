@@ -63,7 +63,7 @@
             this.buttonRememberedUsers.TabIndex = 3;
             this.buttonRememberedUsers.Text = "Remembered Users >>";
             this.buttonRememberedUsers.UseVisualStyleBackColor = false;
-            this.buttonRememberedUsers.Click += new System.EventHandler(this.buttonSlidePanel_Click);
+            this.buttonRememberedUsers.Click += new System.EventHandler(this.buttonRememberedUsers_Click);
             // 
             // checkBoxRememberNewUser
             // 
