@@ -12,11 +12,12 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
     {
         private static readonly string sr_FileName;
         private static ApplicationSettings ApplicationSettingsInstance;
-        public bool AutoLogin { get; set; }
+       
         public string AccessToken { get; set; }
+        public string Name { get; set; }
         static ApplicationSettings()
         {
-            sr_FileName = Application.ExecutablePath + ".settings.xml";
+            sr_FileName =  "AccountSettings.xml";
         }
         private ApplicationSettings()
         {
@@ -28,7 +29,7 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
             {
                 if (ApplicationSettingsInstance == null)
                 {
-                    ApplicationSettingsInstance = ApplicationSettings.FromFileOrDefault();
+                    ApplicationSettingsInstance = ApplicationSettings.Load();
                 }
 
                 return ApplicationSettingsInstance;
@@ -59,7 +60,7 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
 
 
 
-        public static ApplicationSettings FromFileOrDefault()
+        public static ApplicationSettings Load()
         {
             ApplicationSettings loadedSettings = null;
 

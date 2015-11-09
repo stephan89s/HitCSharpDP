@@ -32,6 +32,7 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
+           
             loginAndInit();
         }
         private void loginAndInit()
@@ -40,6 +41,9 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
             if (!string.IsNullOrEmpty(m_result.AccessToken))
             {
                 m_LoggedInUser = m_result.LoggedInUser;
+                ApplicationSettings.Instance.AccessToken = m_result.AccessToken;
+                ApplicationSettings.Instance.Name = m_result.LoggedInUser.Name;
+              
                 this.Hide();
                 DialogResult facebookAccountResult = new FormFacebookAccountBoard(m_LoggedInUser).ShowDialog();
                 closeOrLogout(facebookAccountResult);
@@ -51,6 +55,7 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
         }
         private void closeOrLogout(DialogResult i_facebookAccountResult)
         {
+            ApplicationSettings.Instance.Save();
             FacebookService.Logout(null);
             switch (i_facebookAccountResult)
             {
@@ -87,17 +92,17 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
         protected override void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
-            ApplicationSettings.Instance.AutoLogin = this.checkBoxRememberMe.Checked;
+            ApplicationSettings.Instance.AutoLogin = this.checkBoxRememberUser.Checked;
             ApplicationSettings.Instance.Save();
         }
 
 
         protected override void OnShown(EventArgs e)
         {
-            base.OnLoad(e);
+            base.OnShown(e);
 
             
-            this.checkBoxRememberMe.Checked = ApplicationSettings.Instance.AutoLogin;
+            this.checkBoxRememberUser.Checked = ApplicationSettings.Instance.AutoLogin;
 
             if (ApplicationSettings.Instance.AutoLogin)
             {
