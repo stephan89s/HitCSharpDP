@@ -40,10 +40,7 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
             m_result = FacebookService.Login("909882489077378", "user_birthday", "email", "user_hometown", "user_about_me", "user_photos", "publish_actions", "user_status", "user_tagged_places", "user_friends");
             if (!string.IsNullOrEmpty(m_result.AccessToken))
             {
-                m_LoggedInUser = m_result.LoggedInUser;
-                ApplicationSettings.Instance.AccessToken = m_result.AccessToken;
-                ApplicationSettings.Instance.Name = m_result.LoggedInUser.Name;
-              
+                m_LoggedInUser = m_result.LoggedInUser;          
                 this.Hide();
                 DialogResult facebookAccountResult = new FormFacebookAccountBoard(m_LoggedInUser).ShowDialog();
                 closeOrLogout(facebookAccountResult);
