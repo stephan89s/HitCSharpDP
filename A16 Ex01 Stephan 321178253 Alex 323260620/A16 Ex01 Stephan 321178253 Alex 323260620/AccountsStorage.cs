@@ -12,8 +12,8 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
         private static readonly string sr_FileName;
         private static AccountsStorage s_AccountsStorageInstance;
         public List<UserConfiguration> StorageList { get; set; }
-        public event Action<UserConfiguration> UserConfigurationsAdded;
-        public event Action<UserConfiguration> UserConfigurationsRemoved;
+        public event Action<UserConfiguration> UserConfigurationsAddedToStorage;
+        public event Action<UserConfiguration> UserConfigurationsRemovedFromStorage;
 
         private AccountsStorage()
         {
@@ -43,9 +43,9 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
             if (!StorageList.Any(name=> name.uniqueName==i_UniqueName))
             {
                 StorageList.Add(UserConfigurationToStore);
-                if (UserConfigurationsAdded != null)
+                if (UserConfigurationsAddedToStorage != null)
                 {
-                    UserConfigurationsAdded(UserConfigurationToStore);
+                    UserConfigurationsAddedToStorage(UserConfigurationToStore);
                 }
             }
         }
@@ -53,7 +53,7 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
         public void RemoveFromStorage(AccountsStorage.UserConfiguration i_UserConfigToRemove)
         {
             StorageList.Remove(i_UserConfigToRemove);
-            UserConfigurationsRemoved(i_UserConfigToRemove);
+            UserConfigurationsRemovedFromStorage(i_UserConfigToRemove);
         }
 
 

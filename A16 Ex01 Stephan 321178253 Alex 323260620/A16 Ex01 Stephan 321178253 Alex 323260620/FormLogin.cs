@@ -20,10 +20,10 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
         public FormLogin()
         {
             InitializeComponent();
-            AccountsStorage.Instance.UserConfigurationsAdded += this.AddAndRefreshRememberedUsersListBox;
-            AccountsStorage.Instance.UserConfigurationsRemoved += this.RemoveAndRefreshRememberedUsersListBox;
+            AccountsStorage.Instance.UserConfigurationsAddedToStorage += this.AddAndRefreshRememberedUsersListBox;
+            AccountsStorage.Instance.UserConfigurationsRemovedFromStorage += this.RemoveAndRefreshRememberedUsersListBox;
             FacebookService.s_CollectionLimit = 100;
-
+          
         }
 
         private void buttonLogin_Click(object sender, EventArgs e)
@@ -82,7 +82,7 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
 
         private void logInNewUser()
         {
-            result = FacebookService.Login("909882489077378", "user_birthday", "email", "user_hometown", "user_about_me", "user_photos", "publish_actions", "user_status", "user_tagged_places", "user_friends");
+            result = FacebookService.Login("909882489077378", "user_birthday", "email", "user_hometown", "user_about_me", "user_photos", "publish_actions", "user_status", "user_tagged_places", "user_friends", "user_likes");
             if (!string.IsNullOrEmpty(result.AccessToken))
             {
 

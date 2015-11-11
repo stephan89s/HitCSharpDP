@@ -17,5 +17,10 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
             InitializeComponent();
             dataGridViewComments.DataSource = i_m_selectedPostCommentsList;
         }
+
+        private void buttonCloseComment_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

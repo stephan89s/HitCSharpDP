@@ -8,14 +8,15 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
 {
     public class ApplicationPost : IPublishable
     {
-        public string Message { get; }
         public string From { get; }
+        public string Message { get; }
         public string Title { get; }
         public Post.eType? Type { get; }
         public string Link { get; }
         public DateTime? CreatedTime { get; }
         public DateTime? UpdateTime { get; }
         private readonly string r_PostID;
+
 
         public ApplicationPost(Post i_Post)
         {
@@ -27,6 +28,7 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
             CreatedTime = i_Post.CreatedTime;
             UpdateTime = i_Post.UpdateTime;
             r_PostID = i_Post.Id;
+            
         }
 
         public string GetPublishedItemID()

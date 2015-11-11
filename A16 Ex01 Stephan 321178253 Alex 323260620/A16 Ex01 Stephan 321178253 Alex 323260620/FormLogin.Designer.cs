@@ -93,6 +93,7 @@
             // listBoxRememberedUsers
             // 
             this.listBoxRememberedUsers.FormattingEnabled = true;
+            this.listBoxRememberedUsers.HorizontalScrollbar = true;
             this.listBoxRememberedUsers.ItemHeight = 16;
             this.listBoxRememberedUsers.Location = new System.Drawing.Point(249, 32);
             this.listBoxRememberedUsers.Margin = new System.Windows.Forms.Padding(4);
@@ -128,7 +129,7 @@
             this.Controls.Add(this.checkBoxRememberUser);
             this.Controls.Add(this.buttonRememberedUsers);
             this.Controls.Add(this.buttonLogin);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;

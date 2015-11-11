@@ -31,9 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormFacebookAccountBoard));
             this.labelCheckIns = new System.Windows.Forms.Label();
             this.listBoxCheckIns = new System.Windows.Forms.ListBox();
-            this.buttonCloseTab = new System.Windows.Forms.Button();
             this.buttonComments = new System.Windows.Forms.Button();
-            this.buttonLinkToUrl = new System.Windows.Forms.Button();
             this.buttonShowMoreInfo = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.listBoxFriends = new System.Windows.Forms.ListBox();
@@ -45,29 +43,32 @@
             this.buttonRefreshTable = new System.Windows.Forms.Button();
             this.tabPageEvents = new System.Windows.Forms.TabPage();
             this.dataGridViewEvents = new System.Windows.Forms.DataGridView();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.groupBoxEventsFilter = new System.Windows.Forms.GroupBox();
+            this.dateTimePickerEventStartDate = new System.Windows.Forms.DateTimePicker();
+            this.labelMessage = new System.Windows.Forms.Label();
+            this.labelName = new System.Windows.Forms.Label();
+            this.textBoxEventMessageFilter = new System.Windows.Forms.TextBox();
+            this.textBoxEventFromFilter = new System.Windows.Forms.TextBox();
             this.tabPagePosts = new System.Windows.Forms.TabPage();
             this.dataGridViewPosts = new System.Windows.Forms.DataGridView();
-            this.groupBoxFFilters = new System.Windows.Forms.GroupBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.groupBoxPostFilters = new System.Windows.Forms.GroupBox();
+            this.dateTimePickerPostDate = new System.Windows.Forms.DateTimePicker();
             this.labelContentFilter = new System.Windows.Forms.Label();
             this.labelNameFilter = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.dataGridViewTab = new System.Windows.Forms.TabControl();
+            this.textBoxPostMessageFilter = new System.Windows.Forms.TextBox();
+            this.textBoxPostFromFilter = new System.Windows.Forms.TextBox();
+            this.tabControlShowMoreInfo = new System.Windows.Forms.TabControl();
+            this.checkBoxEventStartDateFilter = new System.Windows.Forms.CheckBox();
+            this.checkBoxPostDateFilter = new System.Windows.Forms.CheckBox();
+            this.buttonGoToURL = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUserSmallPicture)).BeginInit();
             this.tabPageEvents.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEvents)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.groupBoxEventsFilter.SuspendLayout();
             this.tabPagePosts.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPosts)).BeginInit();
-            this.groupBoxFFilters.SuspendLayout();
-            this.dataGridViewTab.SuspendLayout();
+            this.groupBoxPostFilters.SuspendLayout();
+            this.tabControlShowMoreInfo.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelCheckIns
@@ -91,24 +92,12 @@
             this.listBoxCheckIns.Size = new System.Drawing.Size(209, 164);
             this.listBoxCheckIns.TabIndex = 28;
             // 
-            // buttonCloseTab
-            // 
-            this.buttonCloseTab.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonCloseTab.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonCloseTab.Location = new System.Drawing.Point(799, 692);
-            this.buttonCloseTab.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonCloseTab.Name = "buttonCloseTab";
-            this.buttonCloseTab.Size = new System.Drawing.Size(100, 28);
-            this.buttonCloseTab.TabIndex = 25;
-            this.buttonCloseTab.Text = "button3";
-            this.buttonCloseTab.UseVisualStyleBackColor = true;
-            // 
             // buttonComments
             // 
             this.buttonComments.Enabled = false;
             this.buttonComments.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonComments.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonComments.Location = new System.Drawing.Point(154, 692);
+            this.buttonComments.Location = new System.Drawing.Point(13, 692);
             this.buttonComments.Margin = new System.Windows.Forms.Padding(4);
             this.buttonComments.Name = "buttonComments";
             this.buttonComments.Size = new System.Drawing.Size(139, 28);
@@ -116,18 +105,6 @@
             this.buttonComments.Text = "Comments (0)";
             this.buttonComments.UseVisualStyleBackColor = true;
             this.buttonComments.Click += new System.EventHandler(this.buttonComments_Click);
-            // 
-            // buttonLinkToUrl
-            // 
-            this.buttonLinkToUrl.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonLinkToUrl.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonLinkToUrl.Location = new System.Drawing.Point(13, 692);
-            this.buttonLinkToUrl.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonLinkToUrl.Name = "buttonLinkToUrl";
-            this.buttonLinkToUrl.Size = new System.Drawing.Size(100, 28);
-            this.buttonLinkToUrl.TabIndex = 23;
-            this.buttonLinkToUrl.Text = "button1";
-            this.buttonLinkToUrl.UseVisualStyleBackColor = true;
             // 
             // buttonShowMoreInfo
             // 
@@ -208,9 +185,10 @@
             // 
             // buttonLogOut
             // 
-            this.buttonLogOut.Location = new System.Drawing.Point(779, 12);
+            this.buttonLogOut.Location = new System.Drawing.Point(814, 11);
+            this.buttonLogOut.Margin = new System.Windows.Forms.Padding(2);
             this.buttonLogOut.Name = "buttonLogOut";
-            this.buttonLogOut.Size = new System.Drawing.Size(121, 26);
+            this.buttonLogOut.Size = new System.Drawing.Size(88, 28);
             this.buttonLogOut.TabIndex = 30;
             this.buttonLogOut.Text = "LogOut";
             this.buttonLogOut.UseVisualStyleBackColor = true;
@@ -218,19 +196,18 @@
             // 
             // buttonRefreshTable
             // 
-            this.buttonRefreshTable.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonRefreshTable.Location = new System.Drawing.Point(658, 692);
-            this.buttonRefreshTable.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonRefreshTable.Location = new System.Drawing.Point(721, 11);
             this.buttonRefreshTable.Name = "buttonRefreshTable";
             this.buttonRefreshTable.Size = new System.Drawing.Size(88, 28);
             this.buttonRefreshTable.TabIndex = 29;
             this.buttonRefreshTable.Text = "Refresh";
             this.buttonRefreshTable.UseVisualStyleBackColor = true;
+            this.buttonRefreshTable.Click += new System.EventHandler(this.buttonRefreshTable_Click);
             // 
             // tabPageEvents
             // 
             this.tabPageEvents.Controls.Add(this.dataGridViewEvents);
-            this.tabPageEvents.Controls.Add(this.groupBox1);
+            this.tabPageEvents.Controls.Add(this.groupBoxEventsFilter);
             this.tabPageEvents.Location = new System.Drawing.Point(4, 26);
             this.tabPageEvents.Margin = new System.Windows.Forms.Padding(4);
             this.tabPageEvents.Name = "tabPageEvents";
@@ -254,72 +231,78 @@
             this.dataGridViewEvents.Size = new System.Drawing.Size(861, 193);
             this.dataGridViewEvents.TabIndex = 29;
             // 
-            // groupBox1
+            // groupBoxEventsFilter
             // 
-            this.groupBox1.Controls.Add(this.dateTimePicker2);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.textBox3);
-            this.groupBox1.Controls.Add(this.textBox4);
-            this.groupBox1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(8, 8);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(862, 70);
-            this.groupBox1.TabIndex = 30;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Filters";
+            this.groupBoxEventsFilter.Controls.Add(this.checkBoxEventStartDateFilter);
+            this.groupBoxEventsFilter.Controls.Add(this.dateTimePickerEventStartDate);
+            this.groupBoxEventsFilter.Controls.Add(this.labelMessage);
+            this.groupBoxEventsFilter.Controls.Add(this.labelName);
+            this.groupBoxEventsFilter.Controls.Add(this.textBoxEventMessageFilter);
+            this.groupBoxEventsFilter.Controls.Add(this.textBoxEventFromFilter);
+            this.groupBoxEventsFilter.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBoxEventsFilter.Location = new System.Drawing.Point(8, 8);
+            this.groupBoxEventsFilter.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBoxEventsFilter.Name = "groupBoxEventsFilter";
+            this.groupBoxEventsFilter.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBoxEventsFilter.Size = new System.Drawing.Size(862, 70);
+            this.groupBoxEventsFilter.TabIndex = 30;
+            this.groupBoxEventsFilter.TabStop = false;
+            this.groupBoxEventsFilter.Text = "Filters";
             // 
-            // dateTimePicker2
+            // dateTimePickerEventStartDate
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(621, 41);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(200, 24);
-            this.dateTimePicker2.TabIndex = 4;
+            this.dateTimePickerEventStartDate.Enabled = false;
+            this.dateTimePickerEventStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePickerEventStartDate.Location = new System.Drawing.Point(692, 30);
+            this.dateTimePickerEventStartDate.Name = "dateTimePickerEventStartDate";
+            this.dateTimePickerEventStartDate.Size = new System.Drawing.Size(163, 24);
+            this.dateTimePickerEventStartDate.TabIndex = 4;
+            this.dateTimePickerEventStartDate.ValueChanged += new System.EventHandler(this.dateTimePickerEventStartDate_ValueChanged);
             // 
-            // label2
+            // labelMessage
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(8, 49);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(64, 17);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Message:";
+            this.labelMessage.AutoSize = true;
+            this.labelMessage.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelMessage.Location = new System.Drawing.Point(293, 35);
+            this.labelMessage.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelMessage.Name = "labelMessage";
+            this.labelMessage.Size = new System.Drawing.Size(64, 17);
+            this.labelMessage.TabIndex = 3;
+            this.labelMessage.Text = "Message:";
             // 
-            // label3
+            // labelName
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(272, 47);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(45, 17);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "From:";
+            this.labelName.AutoSize = true;
+            this.labelName.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelName.Location = new System.Drawing.Point(8, 35);
+            this.labelName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelName.Name = "labelName";
+            this.labelName.Size = new System.Drawing.Size(48, 17);
+            this.labelName.TabIndex = 2;
+            this.labelName.Text = "Name:";
             // 
-            // textBox3
+            // textBoxEventMessageFilter
             // 
-            this.textBox3.Location = new System.Drawing.Point(83, 41);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(185, 24);
-            this.textBox3.TabIndex = 1;
+            this.textBoxEventMessageFilter.Location = new System.Drawing.Point(365, 32);
+            this.textBoxEventMessageFilter.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxEventMessageFilter.Name = "textBoxEventMessageFilter";
+            this.textBoxEventMessageFilter.Size = new System.Drawing.Size(185, 24);
+            this.textBoxEventMessageFilter.TabIndex = 1;
+            this.textBoxEventMessageFilter.TextChanged += new System.EventHandler(this.textBoxEventMessageFilter_TextChanged);
             // 
-            // textBox4
+            // textBoxEventFromFilter
             // 
-            this.textBox4.Location = new System.Drawing.Point(325, 42);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(191, 24);
-            this.textBox4.TabIndex = 0;
+            this.textBoxEventFromFilter.Location = new System.Drawing.Point(61, 32);
+            this.textBoxEventFromFilter.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxEventFromFilter.Name = "textBoxEventFromFilter";
+            this.textBoxEventFromFilter.Size = new System.Drawing.Size(191, 24);
+            this.textBoxEventFromFilter.TabIndex = 0;
+            this.textBoxEventFromFilter.TextChanged += new System.EventHandler(this.textBoxEventFromFilter_TextChanged);
             // 
             // tabPagePosts
             // 
             this.tabPagePosts.Controls.Add(this.dataGridViewPosts);
-            this.tabPagePosts.Controls.Add(this.groupBoxFFilters);
+            this.tabPagePosts.Controls.Add(this.groupBoxPostFilters);
             this.tabPagePosts.Location = new System.Drawing.Point(4, 26);
             this.tabPagePosts.Margin = new System.Windows.Forms.Padding(4);
             this.tabPagePosts.Name = "tabPagePosts";
@@ -344,35 +327,39 @@
             this.dataGridViewPosts.TabIndex = 1;
             this.dataGridViewPosts.SelectionChanged += new System.EventHandler(this.dataGridViewPosts_SelectionChanged);
             // 
-            // groupBoxFFilters
+            // groupBoxPostFilters
             // 
-            this.groupBoxFFilters.Controls.Add(this.dateTimePicker1);
-            this.groupBoxFFilters.Controls.Add(this.labelContentFilter);
-            this.groupBoxFFilters.Controls.Add(this.labelNameFilter);
-            this.groupBoxFFilters.Controls.Add(this.textBox2);
-            this.groupBoxFFilters.Controls.Add(this.textBox1);
-            this.groupBoxFFilters.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxFFilters.Location = new System.Drawing.Point(8, 8);
-            this.groupBoxFFilters.Margin = new System.Windows.Forms.Padding(4);
-            this.groupBoxFFilters.Name = "groupBoxFFilters";
-            this.groupBoxFFilters.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBoxFFilters.Size = new System.Drawing.Size(862, 70);
-            this.groupBoxFFilters.TabIndex = 28;
-            this.groupBoxFFilters.TabStop = false;
-            this.groupBoxFFilters.Text = "Filters";
+            this.groupBoxPostFilters.Controls.Add(this.checkBoxPostDateFilter);
+            this.groupBoxPostFilters.Controls.Add(this.dateTimePickerPostDate);
+            this.groupBoxPostFilters.Controls.Add(this.labelContentFilter);
+            this.groupBoxPostFilters.Controls.Add(this.labelNameFilter);
+            this.groupBoxPostFilters.Controls.Add(this.textBoxPostMessageFilter);
+            this.groupBoxPostFilters.Controls.Add(this.textBoxPostFromFilter);
+            this.groupBoxPostFilters.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBoxPostFilters.Location = new System.Drawing.Point(8, 8);
+            this.groupBoxPostFilters.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBoxPostFilters.Name = "groupBoxPostFilters";
+            this.groupBoxPostFilters.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBoxPostFilters.Size = new System.Drawing.Size(862, 70);
+            this.groupBoxPostFilters.TabIndex = 28;
+            this.groupBoxPostFilters.TabStop = false;
+            this.groupBoxPostFilters.Text = "Filters";
             // 
-            // dateTimePicker1
+            // dateTimePickerPostDate
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(621, 41);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 24);
-            this.dateTimePicker1.TabIndex = 4;
+            this.dateTimePickerPostDate.Enabled = false;
+            this.dateTimePickerPostDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePickerPostDate.Location = new System.Drawing.Point(692, 30);
+            this.dateTimePickerPostDate.Name = "dateTimePickerPostDate";
+            this.dateTimePickerPostDate.Size = new System.Drawing.Size(163, 24);
+            this.dateTimePickerPostDate.TabIndex = 4;
+            this.dateTimePickerPostDate.ValueChanged += new System.EventHandler(this.dateTimePickerPostDate_ValueChanged);
             // 
             // labelContentFilter
             // 
             this.labelContentFilter.AutoSize = true;
             this.labelContentFilter.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelContentFilter.Location = new System.Drawing.Point(8, 49);
+            this.labelContentFilter.Location = new System.Drawing.Point(293, 35);
             this.labelContentFilter.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelContentFilter.Name = "labelContentFilter";
             this.labelContentFilter.Size = new System.Drawing.Size(64, 17);
@@ -383,55 +370,92 @@
             // 
             this.labelNameFilter.AutoSize = true;
             this.labelNameFilter.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNameFilter.Location = new System.Drawing.Point(272, 47);
+            this.labelNameFilter.Location = new System.Drawing.Point(8, 35);
             this.labelNameFilter.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelNameFilter.Name = "labelNameFilter";
             this.labelNameFilter.Size = new System.Drawing.Size(45, 17);
             this.labelNameFilter.TabIndex = 2;
             this.labelNameFilter.Text = "From:";
             // 
-            // textBox2
+            // textBoxPostMessageFilter
             // 
-            this.textBox2.Location = new System.Drawing.Point(83, 41);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(185, 24);
-            this.textBox2.TabIndex = 1;
+            this.textBoxPostMessageFilter.Location = new System.Drawing.Point(365, 32);
+            this.textBoxPostMessageFilter.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxPostMessageFilter.Name = "textBoxPostMessageFilter";
+            this.textBoxPostMessageFilter.Size = new System.Drawing.Size(185, 24);
+            this.textBoxPostMessageFilter.TabIndex = 1;
+            this.textBoxPostMessageFilter.TextChanged += new System.EventHandler(this.textBoxPostMessageFilter_TextChanged);
             // 
-            // textBox1
+            // textBoxPostFromFilter
             // 
-            this.textBox1.Location = new System.Drawing.Point(325, 42);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(191, 24);
-            this.textBox1.TabIndex = 0;
+            this.textBoxPostFromFilter.Location = new System.Drawing.Point(61, 32);
+            this.textBoxPostFromFilter.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxPostFromFilter.Name = "textBoxPostFromFilter";
+            this.textBoxPostFromFilter.Size = new System.Drawing.Size(191, 24);
+            this.textBoxPostFromFilter.TabIndex = 0;
+            this.textBoxPostFromFilter.TextChanged += new System.EventHandler(this.textBoxPostFromFilter_TextChanged);
             // 
-            // dataGridViewTab
+            // tabControlShowMoreInfo
             // 
-            this.dataGridViewTab.Controls.Add(this.tabPagePosts);
-            this.dataGridViewTab.Controls.Add(this.tabPageEvents);
-            this.dataGridViewTab.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewTab.Location = new System.Drawing.Point(13, 360);
-            this.dataGridViewTab.Margin = new System.Windows.Forms.Padding(4);
-            this.dataGridViewTab.Name = "dataGridViewTab";
-            this.dataGridViewTab.SelectedIndex = 0;
-            this.dataGridViewTab.Size = new System.Drawing.Size(886, 324);
-            this.dataGridViewTab.TabIndex = 22;
-            this.dataGridViewTab.SelectedIndexChanged += new System.EventHandler(this.dataGridViewTab_SelectedIndexChanged);
+            this.tabControlShowMoreInfo.Controls.Add(this.tabPagePosts);
+            this.tabControlShowMoreInfo.Controls.Add(this.tabPageEvents);
+            this.tabControlShowMoreInfo.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabControlShowMoreInfo.Location = new System.Drawing.Point(13, 360);
+            this.tabControlShowMoreInfo.Margin = new System.Windows.Forms.Padding(4);
+            this.tabControlShowMoreInfo.Name = "tabControlShowMoreInfo";
+            this.tabControlShowMoreInfo.SelectedIndex = 0;
+            this.tabControlShowMoreInfo.Size = new System.Drawing.Size(886, 324);
+            this.tabControlShowMoreInfo.TabIndex = 22;
+            this.tabControlShowMoreInfo.Visible = false;
+            this.tabControlShowMoreInfo.SelectedIndexChanged += new System.EventHandler(this.dataGridViewTab_SelectedIndexChanged);
+            // 
+            // checkBoxEventStartDateFilter
+            // 
+            this.checkBoxEventStartDateFilter.AutoSize = true;
+            this.checkBoxEventStartDateFilter.Location = new System.Drawing.Point(590, 34);
+            this.checkBoxEventStartDateFilter.Name = "checkBoxEventStartDateFilter";
+            this.checkBoxEventStartDateFilter.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.checkBoxEventStartDateFilter.Size = new System.Drawing.Size(93, 21);
+            this.checkBoxEventStartDateFilter.TabIndex = 6;
+            this.checkBoxEventStartDateFilter.Text = "Start Date";
+            this.checkBoxEventStartDateFilter.UseVisualStyleBackColor = true;
+            this.checkBoxEventStartDateFilter.CheckedChanged += new System.EventHandler(this.checkBoxEventStartDateFilter_CheckedChanged);
+            // 
+            // checkBoxPostDateFilter
+            // 
+            this.checkBoxPostDateFilter.AutoSize = true;
+            this.checkBoxPostDateFilter.Location = new System.Drawing.Point(593, 34);
+            this.checkBoxPostDateFilter.Name = "checkBoxPostDateFilter";
+            this.checkBoxPostDateFilter.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.checkBoxPostDateFilter.Size = new System.Drawing.Size(90, 21);
+            this.checkBoxPostDateFilter.TabIndex = 7;
+            this.checkBoxPostDateFilter.Text = "Post Date";
+            this.checkBoxPostDateFilter.UseVisualStyleBackColor = true;
+            this.checkBoxPostDateFilter.CheckedChanged += new System.EventHandler(this.checkBoxPostDateFilter_CheckedChanged);
+            // 
+            // buttonGoToURL
+            // 
+            this.buttonGoToURL.Enabled = false;
+            this.buttonGoToURL.Location = new System.Drawing.Point(179, 692);
+            this.buttonGoToURL.Name = "buttonGoToURL";
+            this.buttonGoToURL.Size = new System.Drawing.Size(139, 28);
+            this.buttonGoToURL.TabIndex = 31;
+            this.buttonGoToURL.Text = "Go To URL";
+            this.buttonGoToURL.UseVisualStyleBackColor = true;
+            this.buttonGoToURL.Click += new System.EventHandler(this.buttonGoToURL_Click);
             // 
             // FormFacebookAccountBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(912, 360);
+            this.ClientSize = new System.Drawing.Size(912, 364);
+            this.Controls.Add(this.buttonGoToURL);
             this.Controls.Add(this.buttonRefreshTable);
             this.Controls.Add(this.buttonLogOut);
             this.Controls.Add(this.labelCheckIns);
             this.Controls.Add(this.listBoxCheckIns);
-            this.Controls.Add(this.buttonCloseTab);
             this.Controls.Add(this.buttonComments);
-            this.Controls.Add(this.buttonLinkToUrl);
-            this.Controls.Add(this.dataGridViewTab);
+            this.Controls.Add(this.tabControlShowMoreInfo);
             this.Controls.Add(this.buttonShowMoreInfo);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.listBoxFriends);
@@ -439,18 +463,20 @@
             this.Controls.Add(this.textBoxPostStatus);
             this.Controls.Add(this.labelUserName);
             this.Controls.Add(this.pictureBoxUserSmallPicture);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "FormFacebookAccountBoard";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUserSmallPicture)).EndInit();
             this.tabPageEvents.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEvents)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.groupBoxEventsFilter.ResumeLayout(false);
+            this.groupBoxEventsFilter.PerformLayout();
             this.tabPagePosts.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPosts)).EndInit();
-            this.groupBoxFFilters.ResumeLayout(false);
-            this.groupBoxFFilters.PerformLayout();
-            this.dataGridViewTab.ResumeLayout(false);
+            this.groupBoxPostFilters.ResumeLayout(false);
+            this.groupBoxPostFilters.PerformLayout();
+            this.tabControlShowMoreInfo.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -460,9 +486,7 @@
 
         private System.Windows.Forms.Label labelCheckIns;
         private System.Windows.Forms.ListBox listBoxCheckIns;
-        private System.Windows.Forms.Button buttonCloseTab;
         private System.Windows.Forms.Button buttonComments;
-        private System.Windows.Forms.Button buttonLinkToUrl;
         private System.Windows.Forms.Button buttonShowMoreInfo;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox listBoxFriends;
@@ -474,20 +498,23 @@
         private System.Windows.Forms.Button buttonRefreshTable;
         private System.Windows.Forms.TabPage tabPageEvents;
         private System.Windows.Forms.DataGridView dataGridViewEvents;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.GroupBox groupBoxEventsFilter;
+        private System.Windows.Forms.DateTimePicker dateTimePickerEventStartDate;
+        private System.Windows.Forms.Label labelMessage;
+        private System.Windows.Forms.Label labelName;
+        private System.Windows.Forms.TextBox textBoxEventMessageFilter;
+        private System.Windows.Forms.TextBox textBoxEventFromFilter;
         private System.Windows.Forms.TabPage tabPagePosts;
         private System.Windows.Forms.DataGridView dataGridViewPosts;
-        private System.Windows.Forms.GroupBox groupBoxFFilters;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.GroupBox groupBoxPostFilters;
+        private System.Windows.Forms.DateTimePicker dateTimePickerPostDate;
         private System.Windows.Forms.Label labelContentFilter;
         private System.Windows.Forms.Label labelNameFilter;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TabControl dataGridViewTab;
+        private System.Windows.Forms.TextBox textBoxPostMessageFilter;
+        private System.Windows.Forms.TextBox textBoxPostFromFilter;
+        private System.Windows.Forms.TabControl tabControlShowMoreInfo;
+        private System.Windows.Forms.CheckBox checkBoxEventStartDateFilter;
+        private System.Windows.Forms.CheckBox checkBoxPostDateFilter;
+        private System.Windows.Forms.Button buttonGoToURL;
     }
 }

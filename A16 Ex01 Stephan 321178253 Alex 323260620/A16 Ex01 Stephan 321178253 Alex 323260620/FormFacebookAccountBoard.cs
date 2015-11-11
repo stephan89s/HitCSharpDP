@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -13,22 +14,23 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
     public partial class FormFacebookAccountBoard : Form
     {
         public User LoggedInUser { get; set; }
-        public List<ApplicationPost> AppPostsList { get; }
-        public List<ApplicationEvent> AppEventsList { get; }
-        public List<ApplicationComment> m_selectedGridItemCommentsList;
+        public List<IPublishable> AppPostsList { get; }
+        public List<IPublishable> AppEventsList { get; }
+        public List<ApplicationComment> SelectedGridItemCommentsList { get; }
         private bool m_isShowMoreInfoOpen = false;
-        FormCommentList m_ChosedCommentsForm;
+
         public FormFacebookAccountBoard(User i_LoggedInUser)
         {
             LoggedInUser = i_LoggedInUser;
             InitializeComponent();
-            AppPostsList = new List<ApplicationPost>();
-            AppEventsList = new List<ApplicationEvent>();
-            Text = i_LoggedInUser == null ? "Not Connected" : string.Format("Logged In as {0}", i_LoggedInUser.Name);
+            AppPostsList = new List<IPublishable>();
+            AppEventsList = new List<IPublishable>();
+            SelectedGridItemCommentsList = new List<ApplicationComment>();
+            Text = string.Format("Logged In as {0}", i_LoggedInUser.Name);
         }
-        
 
-    private void buttonLogOut_Click(object sender, EventArgs e)
+
+        private void buttonLogOut_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Retry;
         }
@@ -42,7 +44,7 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
                 switch (MessageBox.Show(this, "Are you sure you want to close This Application?", "Closing", MessageBoxButtons.YesNo))
                 {
                     case DialogResult.No:
-                        e.Cancel = true; 
+                        e.Cancel = true;
                         break;
                     default:
                         break;
@@ -52,59 +54,65 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
 
         private void dataGridViewPosts_SelectionChanged(object sender, EventArgs e)
         {
-            m_selectedGridItemCommentsList = new List<ApplicationComment>();
+            SelectedGridItemCommentsList.Clear();
             int rowIndex = dataGridViewPosts.CurrentCell.RowIndex;
             string ItemID = ((List<ApplicationPost>)dataGridViewPosts.DataSource)[rowIndex].GetPublishedItemID();
 
-            foreach (var post in LoggedInUser.WallPosts)
+            foreach (var post in LoggedInUser.Posts)
             {
-                if(post.Id.Equals(ItemID))
+                if (post.Id.Equals(ItemID))
                 {
                     foreach (var comment in post.Comments)
                     {
-                        m_selectedGridItemCommentsList.Add(new ApplicationComment(comment));
+                        SelectedGridItemCommentsList.Add(new ApplicationComment(comment));
                     }
                     break;
                 }
-                
+
             }
-            
-                buttonComments.Enabled = m_selectedGridItemCommentsList.Count > 0? true : false;
-            buttonComments.Text = string.Format("Comments ({0})", m_selectedGridItemCommentsList.Count);
+            buttonGoToURL.Enabled = !string.IsNullOrEmpty(((List<ApplicationPost>)dataGridViewPosts.DataSource)[rowIndex].Link);
+            buttonComments.Enabled = SelectedGridItemCommentsList.Count > 0 ? true : false;
+            buttonComments.Text = string.Format("Comments ({0})", SelectedGridItemCommentsList.Count);
         }
 
-       
+
 
         private void buttonShowMoreInfo_Click(object sender, EventArgs e)
         {
-            const int k_ShowMoreInfoFormWidthChange = 310;
+            const int k_ShowMoreInfoFormWidthChange = 300;
             if (!m_isShowMoreInfoOpen)
             {
                 Height += k_ShowMoreInfoFormWidthChange;
-                m_isShowMoreInfoOpen = true;
                 buttonShowMoreInfo.Text = "Close Info";
-
             }
             else
             {
                 Height -= k_ShowMoreInfoFormWidthChange;
-                m_isShowMoreInfoOpen = false;
                 buttonShowMoreInfo.Text = "⇊  ⇊  ShowMoreInfo  ⇊  ⇊";
             }
-            
+            tabControlShowMoreInfo.Visible = !tabControlShowMoreInfo.Visible;
+            m_isShowMoreInfoOpen = !m_isShowMoreInfoOpen;
         }
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            showAccountBoardStartPageInfo();
+            InitializeAccountBoard();
 
         }
 
+        private void InitializeAccountBoard()
+        {
+            showAccountBoardStartPageInfo();
+            showPostsOnForm();
+            showEventsOnForm();
+        }
         private void showAccountBoardStartPageInfo()
         {
             pictureBoxUserSmallPicture.LoadAsync(LoggedInUser.PictureNormalURL);
             labelUserName.Text = LoggedInUser.Name;
+            listBoxFriends.Items.Clear();
+            listBoxCheckIns.Items.Clear();
             foreach (User friend in LoggedInUser.Friends)
             {
                 listBoxFriends.Items.Add(friend.Name);
@@ -116,51 +124,46 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
         }
 
 
-        protected override void OnShown(EventArgs e)
-        {
-            showPostsOnForm();
-            showEventsOnForm();
-        }
-
-
         private void showPostsOnForm()
         {
-
-            foreach (var post in LoggedInUser.WallPosts)
+            AppPostsList.Clear();
+            foreach (var post in LoggedInUser.Posts)
             {
                 AppPostsList.Add(new ApplicationPost(post));
 
             }
-            dataGridViewPosts.DataSource = AppPostsList;
+
+            dataGridViewPosts.DataSource = AppPostsList.ConvertAll(post => (ApplicationPost)post);
 
         }
         private void showEventsOnForm()
         {
-
-            foreach (var FBevent in LoggedInUser.Events )
+            AppEventsList.Clear();
+            foreach (var FBevent in LoggedInUser.Events)
             {
                 AppEventsList.Add(new ApplicationEvent(FBevent));
 
             }
-            dataGridViewEvents.DataSource = AppEventsList;
+            dataGridViewEvents.DataSource = AppEventsList.ConvertAll(post => (ApplicationEvent)post);
+
 
         }
 
         private void buttonComments_Click(object sender, EventArgs e)
         {
 
-            m_ChosedCommentsForm = new FormCommentList(m_selectedGridItemCommentsList);
-           m_ChosedCommentsForm.ShowDialog();
+            new FormCommentList(SelectedGridItemCommentsList).ShowDialog();
+
         }
 
 
         private void dataGridViewTab_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (dataGridViewTab.SelectedTab.Name.Equals("tabPageEvents"))
+            if (tabControlShowMoreInfo.SelectedTab.Name.Equals("tabPageEvents"))
             {
                 buttonComments.Visible = false;
             }
-            else if (dataGridViewTab.SelectedTab.Name.Equals("tabPagePosts"))
+            else if (tabControlShowMoreInfo.SelectedTab.Name.Equals("tabPagePosts"))
             {
                 buttonComments.Visible = true;
             }
@@ -174,7 +177,142 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
             {
                 LoggedInUser.PostStatus(textBoxPostStatus.Text);
                 textBoxPostStatus.Clear();
+                LoggedInUser.ReFetch();
+                showPostsOnForm();
             }
+
+        }
+
+
+
+        private void gridFilter()
+        {
+            string containText;
+            string containsName;
+            DateTime? dateField = null;
+            bool isDateSelectedAndMatch;
+
+
+            List<IPublishable> filtredList = new List<IPublishable>();
+            if (tabControlShowMoreInfo.SelectedTab.Name.Equals(tabPagePosts.Name))
+            {
+
+                containText = textBoxPostMessageFilter.Text;
+                containsName = textBoxPostFromFilter.Text;
+                foreach (IPublishable post in AppPostsList)
+                {
+                    ApplicationPost appPost = (ApplicationPost)post;
+                    isDateSelectedAndMatch = checkBoxPostDateFilter.Checked ? appPost.CreatedTime.Value.Date.Equals(dateTimePickerPostDate.Value.Date) : true;
+                    if (appPost.Message.IndexOf(containText, StringComparison.OrdinalIgnoreCase) > -1 && appPost.From.IndexOf(containsName, StringComparison.OrdinalIgnoreCase) > -1
+                        && isDateSelectedAndMatch)
+
+                    {
+                        filtredList.Add(post);
+
+                    }
+                }
+
+                dataGridViewPosts.DataSource = filtredList.ConvertAll(post => (ApplicationPost)(post));
+            }
+            else if (tabControlShowMoreInfo.SelectedTab.Name.Equals(tabPageEvents.Name))
+            {
+
+                containText = textBoxEventMessageFilter.Text;
+                containsName = textBoxEventFromFilter.Text;
+                foreach (IPublishable fbevent in AppEventsList)
+                {
+                    ApplicationEvent appEvent = (ApplicationEvent)fbevent;
+                    isDateSelectedAndMatch = checkBoxEventStartDateFilter.Checked ? appEvent.StartTime.Value.Date.Equals(dateTimePickerEventStartDate.Value.Date) : true;
+                    if (appEvent.Name.IndexOf(containsName, StringComparison.OrdinalIgnoreCase) > -1
+                        && appEvent.Description.IndexOf(containText, StringComparison.OrdinalIgnoreCase) > -1 && isDateSelectedAndMatch)
+                    {
+                        filtredList.Add(fbevent);
+
+                    }
+                }
+
+                dataGridViewEvents.DataSource = filtredList.ConvertAll(fbEvent => (ApplicationEvent)(fbEvent));
+            }
+        }
+
+        private void textBoxPostMessageFilter_TextChanged(object sender, EventArgs e)
+        {
+            gridFilter();
+
+        }
+
+        private void textBoxPostFromFilter_TextChanged(object sender, EventArgs e)
+        {
+            gridFilter();
+        }
+
+        private void textBoxEventMessageFilter_TextChanged(object sender, EventArgs e)
+        {
+            gridFilter();
+        }
+
+        private void textBoxEventFromFilter_TextChanged(object sender, EventArgs e)
+        {
+
+            gridFilter();
+        }
+
+        private void buttonRefreshTable_Click(object sender, EventArgs e)
+        {
+            LoggedInUser.ReFetch();
+            textBoxEventFromFilter.Clear();
+            textBoxEventMessageFilter.Clear();
+            textBoxPostFromFilter.Clear();
+            textBoxPostMessageFilter.Clear();
+            InitializeAccountBoard();
+        }
+
+        private void checkBoxEventStartDateFilter_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox checkBox = sender as CheckBox;
+            if (checkBox != null)
+            {
+                dateTimePickerFilter(checkBox, dateTimePickerEventStartDate);
+            }
+
+        }
+        private void dateTimePickerFilter(CheckBox i_CheckBox, DateTimePicker i_DatePicker)
+            {
+            
+                i_DatePicker.Enabled = i_CheckBox.Checked;
+
+                gridFilter();
+                if (!i_CheckBox.Checked)
+                {
+                    i_DatePicker.Value = DateTime.Now;
+                }
+            
+        }
+
+        private void checkBoxPostDateFilter_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox checkBox = sender as CheckBox;
+            if (checkBox != null)
+            {
+                dateTimePickerFilter(checkBox, dateTimePickerPostDate);
+            }
+        }
+
+        private void dateTimePickerPostDate_ValueChanged(object sender, EventArgs e)
+        {
+            gridFilter();
+        }
+
+        private void dateTimePickerEventStartDate_ValueChanged(object sender, EventArgs e)
+        {
+            gridFilter();
+        }
+
+        private void buttonGoToURL_Click(object sender, EventArgs e)
+        {
+            int rowIndex = dataGridViewPosts.CurrentCell.RowIndex;
+
+            System.Diagnostics.Process.Start(((List<ApplicationPost>)dataGridViewPosts.DataSource)[rowIndex].Link);
         }
     }
 
