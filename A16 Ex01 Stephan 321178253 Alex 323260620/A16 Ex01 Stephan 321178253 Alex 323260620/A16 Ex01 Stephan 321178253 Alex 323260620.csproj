@@ -52,10 +52,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountsStorage.cs" />
     <Compile Include="ApplicationComment.cs" />
     <Compile Include="ApplicationEvent.cs" />
     <Compile Include="ApplicationPost.cs" />
-    <Compile Include="ApplicationSettings.cs" />
     <Compile Include="FormCommentList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -79,6 +79,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormCommentList.resx">
       <DependentUpon>FormCommentList.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FormFacebookAccountBoard.resx">
       <DependentUpon>FormFacebookAccountBoard.cs</DependentUpon>

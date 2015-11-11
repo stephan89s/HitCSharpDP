@@ -23,7 +23,8 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
             LoggedInUser = i_LoggedInUser;
             InitializeComponent();
             AppPostsList = new List<ApplicationPost>();
-            AppEventsList = new List<ApplicationEvent>(); 
+            AppEventsList = new List<ApplicationEvent>();
+            Text = i_LoggedInUser == null ? "Not Connected" : string.Format("Logged In as {0}", i_LoggedInUser.Name);
         }
         
 

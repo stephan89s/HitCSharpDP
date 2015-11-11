@@ -14,45 +14,87 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
 {
     public partial class FormLogin : Form
     {
-        public User m_LoggedInUser { get; set; }
-        public LoginResult m_result { get; set; }
-        private bool m_isRememberUsersOpen = false;
+        public LoginResult result { get; set; }
+        public bool isRememberedUsersOpen { get; set; }
+
         public FormLogin()
         {
             InitializeComponent();
-            FacebookService.s_CollectionLimit = 200;
-        }
-
-        private void FormLogin_Load(object sender, EventArgs e)
-        {
+            AccountsStorage.Instance.UserConfigurationsAdded += this.AddAndRefreshRememberedUsersListBox;
+            AccountsStorage.Instance.UserConfigurationsRemoved += this.RemoveAndRefreshRememberedUsersListBox;
+            FacebookService.s_CollectionLimit = 100;
 
         }
-
-        
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
-           
-            loginAndInit();
-        }
-        private void loginAndInit()
-        {
-            m_result = FacebookService.Login("909882489077378", "user_birthday", "email", "user_hometown", "user_about_me", "user_photos", "publish_actions", "user_status", "user_tagged_places", "user_friends");
-            if (!string.IsNullOrEmpty(m_result.AccessToken))
+            if (isRememberedUsersOpen && listBoxRememberedUsers.SelectedIndex > -1)
             {
-                m_LoggedInUser = m_result.LoggedInUser;          
+
+                logInWithRememberedUser();
+            }
+            else
+            {
+                logInNewUser();
+            }
+            
+        }
+
+        private void InitAccountBoard()
+        {
+            if (result.ErrorMessage == null)
+            {
                 this.Hide();
-                DialogResult facebookAccountResult = new FormFacebookAccountBoard(m_LoggedInUser).ShowDialog();
+                DialogResult facebookAccountResult = new FormFacebookAccountBoard(result.LoggedInUser).ShowDialog();
                 closeOrLogout(facebookAccountResult);
             }
             else
             {
-                MessageBox.Show(m_result.ErrorMessage);
+                MessageBox.Show(result.ErrorMessage);
             }
+        }
+
+        private void AddAndRefreshRememberedUsersListBox(AccountsStorage.UserConfiguration i_UserConfiguration)
+        {
+            listBoxRememberedUsers.Items.Add(i_UserConfiguration);
+        }
+        private void RemoveAndRefreshRememberedUsersListBox(AccountsStorage.UserConfiguration i_UserConfiguration)
+        {
+            listBoxRememberedUsers.Items.Remove(i_UserConfiguration);
+        }
+
+        private void StoreLoggedInUserConfiguration()
+        {
+            string logedUserEMail = result.LoggedInUser.Email == null ? "No Email" : result.LoggedInUser.Email;
+            string uniqName = string.Format("{0} ({1})", result.LoggedInUser.Name, logedUserEMail);
+            AccountsStorage.Instance.AddToStorage(uniqName, result.AccessToken);
+
+        }
+        private void logInWithRememberedUser()
+        {
+            string knownAccsesToken = ((AccountsStorage.UserConfiguration)listBoxRememberedUsers.SelectedItem).AccessToken;
+            if (knownAccsesToken != null)
+            {
+                result = FacebookService.Connect(knownAccsesToken);
+            }
+            InitAccountBoard();
+        }
+
+        private void logInNewUser()
+        {
+            result = FacebookService.Login("909882489077378", "user_birthday", "email", "user_hometown", "user_about_me", "user_photos", "publish_actions", "user_status", "user_tagged_places", "user_friends");
+            if (!string.IsNullOrEmpty(result.AccessToken))
+            {
+
+                if (checkBoxRememberUser.Checked)
+                {
+                    StoreLoggedInUserConfiguration();
+                }
+            }
+            InitAccountBoard();
         }
         private void closeOrLogout(DialogResult i_facebookAccountResult)
         {
-            ApplicationSettings.Instance.Save();
             FacebookService.Logout(null);
             switch (i_facebookAccountResult)
             {
@@ -71,50 +113,57 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
         private void buttonRememberedUsers_Click(object sender, EventArgs e)
         {
             const int k_RememberUsersFormWidthChange = 210;
-            if (!m_isRememberUsersOpen)
+            if (!isRememberedUsersOpen)
             {
+
                 Width += k_RememberUsersFormWidthChange;
-                m_isRememberUsersOpen = true;
+                isRememberedUsersOpen = true;
                 buttonRememberedUsers.Text = "<< Close Remembered Users";
 
             }
             else
             {
                 Width -= k_RememberUsersFormWidthChange;
-                m_isRememberUsersOpen = false;
+                isRememberedUsersOpen = false;
                 buttonRememberedUsers.Text = "Remembered Users >>";
             }
         }
+      
+        
 
-        protected override void OnClosing(CancelEventArgs e)
+        protected override void OnClosed(EventArgs e)
         {
-            base.OnClosing(e);
-            ApplicationSettings.Instance.AutoLogin = this.checkBoxRememberUser.Checked;
-            ApplicationSettings.Instance.Save();
+            AccountsStorage.Instance.SaveToFile();
+            base.OnClosed(e);
         }
-
-
-        protected override void OnShown(EventArgs e)
+        protected override void OnLoad(EventArgs e)
         {
-            base.OnShown(e);
-
-            
-            this.checkBoxRememberUser.Checked = ApplicationSettings.Instance.AutoLogin;
-
-            if (ApplicationSettings.Instance.AutoLogin)
+            base.OnLoad(e);
+            AccountsStorage.Instance.LoadFromFile();
+            foreach (var userConfig in AccountsStorage.Instance.StorageList)
             {
-                autoLogin();
+                AddAndRefreshRememberedUsersListBox(userConfig);
             }
         }
 
-        private void autoLogin()
+        private void buttonDeletFromUsersList_Click(object sender, EventArgs e)
         {
-            LoginResult result = FacebookService.Connect(ApplicationSettings.Instance.AccessToken);
-            if (string.IsNullOrEmpty(result.ErrorMessage))
+            AccountsStorage.Instance.RemoveFromStorage((AccountsStorage.UserConfiguration)listBoxRememberedUsers.SelectedItem);
+
+        }
+
+        private void listBoxRememberedUsers_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
             {
-                m_LoggedInUser = result.LoggedInUser;
-                
+                logInWithRememberedUser();
             }
+
+        }
+
+        private void listBoxRememberedUsers_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            logInWithRememberedUser();
         }
     }
 

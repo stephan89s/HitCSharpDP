@@ -99,6 +99,8 @@
             this.listBoxRememberedUsers.Name = "listBoxRememberedUsers";
             this.listBoxRememberedUsers.Size = new System.Drawing.Size(244, 132);
             this.listBoxRememberedUsers.TabIndex = 8;
+            this.listBoxRememberedUsers.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listBoxRememberedUsers_KeyDown);
+            this.listBoxRememberedUsers.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBoxRememberedUsers_MouseDoubleClick);
             // 
             // buttonDeletFromUsersList
             // 
@@ -112,13 +114,14 @@
             this.buttonDeletFromUsersList.TabIndex = 7;
             this.buttonDeletFromUsersList.Text = "Delete From List";
             this.buttonDeletFromUsersList.UseVisualStyleBackColor = false;
+            this.buttonDeletFromUsersList.Click += new System.EventHandler(this.buttonDeletFromUsersList_Click);
             // 
             // FormLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(84)))), ((int)(((byte)(146)))));
-            this.ClientSize = new System.Drawing.Size(233, 243);
+            this.ClientSize = new System.Drawing.Size(235, 243);
             this.Controls.Add(this.labelRememberedUsers);
             this.Controls.Add(this.listBoxRememberedUsers);
             this.Controls.Add(this.buttonDeletFromUsersList);
@@ -131,7 +134,6 @@
             this.MinimizeBox = false;
             this.Name = "FormLogin";
             this.Text = "Login";
-            this.Load += new System.EventHandler(this.FormLogin_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

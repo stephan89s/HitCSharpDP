@@ -44,29 +44,29 @@
             this.buttonLogOut = new System.Windows.Forms.Button();
             this.buttonRefreshTable = new System.Windows.Forms.Button();
             this.tabPageEvents = new System.Windows.Forms.TabPage();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.dataGridViewEvents = new System.Windows.Forms.DataGridView();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
             this.tabPagePosts = new System.Windows.Forms.TabPage();
-            this.groupBoxFFilters = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.labelNameFilter = new System.Windows.Forms.Label();
-            this.labelContentFilter = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.dataGridViewPosts = new System.Windows.Forms.DataGridView();
+            this.groupBoxFFilters = new System.Windows.Forms.GroupBox();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.labelContentFilter = new System.Windows.Forms.Label();
+            this.labelNameFilter = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.dataGridViewTab = new System.Windows.Forms.TabControl();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUserSmallPicture)).BeginInit();
             this.tabPageEvents.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEvents)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.tabPagePosts.SuspendLayout();
-            this.groupBoxFFilters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPosts)).BeginInit();
+            this.groupBoxFFilters.SuspendLayout();
             this.dataGridViewTab.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -240,6 +240,20 @@
             this.tabPageEvents.Text = "Events";
             this.tabPageEvents.UseVisualStyleBackColor = true;
             // 
+            // dataGridViewEvents
+            // 
+            this.dataGridViewEvents.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewEvents.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridViewEvents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewEvents.Location = new System.Drawing.Point(9, 86);
+            this.dataGridViewEvents.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewEvents.MultiSelect = false;
+            this.dataGridViewEvents.Name = "dataGridViewEvents";
+            this.dataGridViewEvents.RowHeadersVisible = false;
+            this.dataGridViewEvents.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewEvents.Size = new System.Drawing.Size(861, 193);
+            this.dataGridViewEvents.TabIndex = 29;
+            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.dateTimePicker2);
@@ -257,32 +271,12 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filters";
             // 
-            // textBox4
+            // dateTimePicker2
             // 
-            this.textBox4.Location = new System.Drawing.Point(325, 42);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(191, 24);
-            this.textBox4.TabIndex = 0;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(83, 41);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(185, 24);
-            this.textBox3.TabIndex = 1;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(272, 47);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(45, 17);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "From:";
+            this.dateTimePicker2.Location = new System.Drawing.Point(621, 41);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(200, 24);
+            this.dateTimePicker2.TabIndex = 4;
             // 
             // label2
             // 
@@ -295,26 +289,32 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Message:";
             // 
-            // dateTimePicker2
+            // label3
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(621, 41);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(200, 24);
-            this.dateTimePicker2.TabIndex = 4;
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(272, 47);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(45, 17);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "From:";
             // 
-            // dataGridViewEvents
+            // textBox3
             // 
-            this.dataGridViewEvents.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridViewEvents.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridViewEvents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewEvents.Location = new System.Drawing.Point(9, 86);
-            this.dataGridViewEvents.Margin = new System.Windows.Forms.Padding(4);
-            this.dataGridViewEvents.MultiSelect = false;
-            this.dataGridViewEvents.Name = "dataGridViewEvents";
-            this.dataGridViewEvents.RowHeadersVisible = false;
-            this.dataGridViewEvents.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewEvents.Size = new System.Drawing.Size(861, 193);
-            this.dataGridViewEvents.TabIndex = 29;
+            this.textBox3.Location = new System.Drawing.Point(83, 41);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(185, 24);
+            this.textBox3.TabIndex = 1;
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(325, 42);
+            this.textBox4.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(191, 24);
+            this.textBox4.TabIndex = 0;
             // 
             // tabPagePosts
             // 
@@ -328,6 +328,21 @@
             this.tabPagePosts.TabIndex = 2;
             this.tabPagePosts.Text = "Posts";
             this.tabPagePosts.UseVisualStyleBackColor = true;
+            // 
+            // dataGridViewPosts
+            // 
+            this.dataGridViewPosts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewPosts.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridViewPosts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewPosts.Location = new System.Drawing.Point(9, 86);
+            this.dataGridViewPosts.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewPosts.MultiSelect = false;
+            this.dataGridViewPosts.Name = "dataGridViewPosts";
+            this.dataGridViewPosts.RowHeadersVisible = false;
+            this.dataGridViewPosts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewPosts.Size = new System.Drawing.Size(861, 193);
+            this.dataGridViewPosts.TabIndex = 1;
+            this.dataGridViewPosts.SelectionChanged += new System.EventHandler(this.dataGridViewPosts_SelectionChanged);
             // 
             // groupBoxFFilters
             // 
@@ -346,32 +361,12 @@
             this.groupBoxFFilters.TabStop = false;
             this.groupBoxFFilters.Text = "Filters";
             // 
-            // textBox1
+            // dateTimePicker1
             // 
-            this.textBox1.Location = new System.Drawing.Point(325, 42);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(191, 24);
-            this.textBox1.TabIndex = 0;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(83, 41);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(185, 24);
-            this.textBox2.TabIndex = 1;
-            // 
-            // labelNameFilter
-            // 
-            this.labelNameFilter.AutoSize = true;
-            this.labelNameFilter.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNameFilter.Location = new System.Drawing.Point(272, 47);
-            this.labelNameFilter.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelNameFilter.Name = "labelNameFilter";
-            this.labelNameFilter.Size = new System.Drawing.Size(45, 17);
-            this.labelNameFilter.TabIndex = 2;
-            this.labelNameFilter.Text = "From:";
+            this.dateTimePicker1.Location = new System.Drawing.Point(621, 41);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 24);
+            this.dateTimePicker1.TabIndex = 4;
             // 
             // labelContentFilter
             // 
@@ -384,27 +379,32 @@
             this.labelContentFilter.TabIndex = 3;
             this.labelContentFilter.Text = "Message:";
             // 
-            // dateTimePicker1
+            // labelNameFilter
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(621, 41);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 24);
-            this.dateTimePicker1.TabIndex = 4;
+            this.labelNameFilter.AutoSize = true;
+            this.labelNameFilter.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNameFilter.Location = new System.Drawing.Point(272, 47);
+            this.labelNameFilter.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelNameFilter.Name = "labelNameFilter";
+            this.labelNameFilter.Size = new System.Drawing.Size(45, 17);
+            this.labelNameFilter.TabIndex = 2;
+            this.labelNameFilter.Text = "From:";
             // 
-            // dataGridViewPosts
+            // textBox2
             // 
-            this.dataGridViewPosts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridViewPosts.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridViewPosts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewPosts.Location = new System.Drawing.Point(9, 86);
-            this.dataGridViewPosts.Margin = new System.Windows.Forms.Padding(4);
-            this.dataGridViewPosts.MultiSelect = false;
-            this.dataGridViewPosts.Name = "dataGridViewPosts";
-            this.dataGridViewPosts.RowHeadersVisible = false;
-            this.dataGridViewPosts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewPosts.Size = new System.Drawing.Size(861, 193);
-            this.dataGridViewPosts.TabIndex = 1;
-            this.dataGridViewPosts.SelectionChanged += new System.EventHandler(this.dataGridViewPosts_SelectionChanged);
+            this.textBox2.Location = new System.Drawing.Point(83, 41);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(185, 24);
+            this.textBox2.TabIndex = 1;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(325, 42);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(191, 24);
+            this.textBox1.TabIndex = 0;
             // 
             // dataGridViewTab
             // 
@@ -441,16 +441,15 @@
             this.Controls.Add(this.pictureBoxUserSmallPicture);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormFacebookAccountBoard";
-            this.Text = "Logged In FacebookApp";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUserSmallPicture)).EndInit();
             this.tabPageEvents.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEvents)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEvents)).EndInit();
             this.tabPagePosts.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPosts)).EndInit();
             this.groupBoxFFilters.ResumeLayout(false);
             this.groupBoxFFilters.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPosts)).EndInit();
             this.dataGridViewTab.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
