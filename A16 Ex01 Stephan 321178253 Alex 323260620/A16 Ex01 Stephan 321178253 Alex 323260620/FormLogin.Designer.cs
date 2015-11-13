@@ -73,9 +73,9 @@
             this.checkBoxRememberUser.Location = new System.Drawing.Point(13, 78);
             this.checkBoxRememberUser.Margin = new System.Windows.Forms.Padding(4);
             this.checkBoxRememberUser.Name = "checkBoxRememberUser";
-            this.checkBoxRememberUser.Size = new System.Drawing.Size(162, 25);
+            this.checkBoxRememberUser.Size = new System.Drawing.Size(149, 25);
             this.checkBoxRememberUser.TabIndex = 6;
-            this.checkBoxRememberUser.Text = "Remember User";
+            this.checkBoxRememberUser.Text = "Remember Me";
             this.checkBoxRememberUser.UseVisualStyleBackColor = false;
             // 
             // labelRememberedUsers
@@ -83,7 +83,7 @@
             this.labelRememberedUsers.AutoSize = true;
             this.labelRememberedUsers.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(84)))), ((int)(((byte)(146)))));
             this.labelRememberedUsers.Font = new System.Drawing.Font("Arial", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelRememberedUsers.Location = new System.Drawing.Point(274, 9);
+            this.labelRememberedUsers.Location = new System.Drawing.Point(259, 7);
             this.labelRememberedUsers.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelRememberedUsers.Name = "labelRememberedUsers";
             this.labelRememberedUsers.Size = new System.Drawing.Size(169, 21);
@@ -122,7 +122,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(84)))), ((int)(((byte)(146)))));
-            this.ClientSize = new System.Drawing.Size(235, 243);
+            this.ClientSize = new System.Drawing.Size(234, 243);
             this.Controls.Add(this.labelRememberedUsers);
             this.Controls.Add(this.listBoxRememberedUsers);
             this.Controls.Add(this.buttonDeletFromUsersList);

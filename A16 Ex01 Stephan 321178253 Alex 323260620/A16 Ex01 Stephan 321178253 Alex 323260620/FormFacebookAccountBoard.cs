@@ -13,10 +13,22 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
 {
     public partial class FormFacebookAccountBoard : Form
     {
-        public User LoggedInUser { get; set; }
-        public List<IPublishable> AppPostsList { get; }
-        public List<IPublishable> AppEventsList { get; }
-        public List<ApplicationComment> SelectedGridItemCommentsList { get; }
+        public User LoggedInUser
+        {
+            get; set;
+        }
+        public List<IPublishable> AppPostsList
+        {
+            get;
+        }
+        public List<IPublishable> AppEventsList
+        {
+            get;
+        }
+        public List<ApplicationComment> SelectedGridItemCommentsList
+        {
+            get;
+        }
         private bool m_isShowMoreInfoOpen = false;
 
         public FormFacebookAccountBoard(User i_LoggedInUser)
@@ -37,7 +49,8 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             base.OnFormClosing(e);
-            if (e.CloseReason == CloseReason.WindowsShutDown) return;
+            if (e.CloseReason == CloseReason.WindowsShutDown)
+                return;
 
             if (e.CloseReason == CloseReason.UserClosing)
             {
@@ -185,77 +198,65 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
 
 
 
+
         private void gridFilter()
         {
-            string containText;
-            string containsName;
-            DateTime? dateField = null;
-            bool isDateSelectedAndMatch;
 
-
-            List<IPublishable> filtredList = new List<IPublishable>();
             if (tabControlShowMoreInfo.SelectedTab.Name.Equals(tabPagePosts.Name))
             {
-
-                containText = textBoxPostMessageFilter.Text;
-                containsName = textBoxPostFromFilter.Text;
-                foreach (IPublishable post in AppPostsList)
-                {
-                    ApplicationPost appPost = (ApplicationPost)post;
-                    isDateSelectedAndMatch = checkBoxPostDateFilter.Checked ? appPost.CreatedTime.Value.Date.Equals(dateTimePickerPostDate.Value.Date) : true;
-                    if (appPost.Message.IndexOf(containText, StringComparison.OrdinalIgnoreCase) > -1 && appPost.From.IndexOf(containsName, StringComparison.OrdinalIgnoreCase) > -1
-                        && isDateSelectedAndMatch)
-
-                    {
-                        filtredList.Add(post);
-
-                    }
-                }
-
-                dataGridViewPosts.DataSource = filtredList.ConvertAll(post => (ApplicationPost)(post));
+                refreshPostGrid();
             }
             else if (tabControlShowMoreInfo.SelectedTab.Name.Equals(tabPageEvents.Name))
             {
-
-                containText = textBoxEventMessageFilter.Text;
-                containsName = textBoxEventFromFilter.Text;
-                foreach (IPublishable fbevent in AppEventsList)
-                {
-                    ApplicationEvent appEvent = (ApplicationEvent)fbevent;
-                    isDateSelectedAndMatch = checkBoxEventStartDateFilter.Checked ? appEvent.StartTime.Value.Date.Equals(dateTimePickerEventStartDate.Value.Date) : true;
-                    if (appEvent.Name.IndexOf(containsName, StringComparison.OrdinalIgnoreCase) > -1
-                        && appEvent.Description.IndexOf(containText, StringComparison.OrdinalIgnoreCase) > -1 && isDateSelectedAndMatch)
-                    {
-                        filtredList.Add(fbevent);
-
-                    }
-                }
-
-                dataGridViewEvents.DataSource = filtredList.ConvertAll(fbEvent => (ApplicationEvent)(fbEvent));
+                refreshEventGrid();
             }
         }
 
-        private void textBoxPostMessageFilter_TextChanged(object sender, EventArgs e)
+        private void refreshEventGrid()
         {
-            gridFilter();
+            string containText = textBoxEventMessageFilter.Text;
+            string containsName = textBoxEventFromFilter.Text;
+            bool isDateSelectedAndMatch;
+            List<IPublishable> filtredList = new List<IPublishable>();
+            foreach (IPublishable fbevent in AppEventsList)
+            {
+                ApplicationEvent appEvent = (ApplicationEvent)fbevent;
+                isDateSelectedAndMatch = checkBoxEventStartDateFilter.Checked ? appEvent.StartTime.Value.Date.Equals(dateTimePickerEventStartDate.Value.Date) : true;
+                if (appEvent.Name.IndexOf(containsName, StringComparison.OrdinalIgnoreCase) > -1
+                    && appEvent.Description.IndexOf(containText, StringComparison.OrdinalIgnoreCase) > -1 && isDateSelectedAndMatch)
+                {
+                    filtredList.Add(fbevent);
 
+                }
+            }
+
+            dataGridViewEvents.DataSource = filtredList.ConvertAll(fbEvent => (ApplicationEvent)(fbEvent));
         }
 
-        private void textBoxPostFromFilter_TextChanged(object sender, EventArgs e)
-        {
-            gridFilter();
-        }
 
-        private void textBoxEventMessageFilter_TextChanged(object sender, EventArgs e)
-        {
-            gridFilter();
-        }
-
-        private void textBoxEventFromFilter_TextChanged(object sender, EventArgs e)
+        private void refreshPostGrid()
         {
 
-            gridFilter();
+            string containText = textBoxPostMessageFilter.Text;
+            string containsName = textBoxPostFromFilter.Text;
+            bool isDateSelectedAndMatch;
+            List<IPublishable> filtredList = new List<IPublishable>();
+            foreach (IPublishable post in AppPostsList)
+            {
+                ApplicationPost appPost = (ApplicationPost)post;
+                isDateSelectedAndMatch = checkBoxPostDateFilter.Checked ? appPost.CreatedTime.Value.Date.Equals(dateTimePickerPostDate.Value.Date) : true;
+                if (appPost.Message.IndexOf(containText, StringComparison.OrdinalIgnoreCase) > -1 && appPost.From.IndexOf(containsName, StringComparison.OrdinalIgnoreCase) > -1
+                    && isDateSelectedAndMatch)
+
+                {
+                    filtredList.Add(post);
+
+                }
+            }
+
+            dataGridViewPosts.DataSource = filtredList.ConvertAll(post => (ApplicationPost)(post));
         }
+
 
         private void buttonRefreshTable_Click(object sender, EventArgs e)
         {
@@ -277,16 +278,16 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
 
         }
         private void dateTimePickerFilter(CheckBox i_CheckBox, DateTimePicker i_DatePicker)
-            {
-            
-                i_DatePicker.Enabled = i_CheckBox.Checked;
+        {
 
-                gridFilter();
-                if (!i_CheckBox.Checked)
-                {
-                    i_DatePicker.Value = DateTime.Now;
-                }
-            
+            i_DatePicker.Enabled = i_CheckBox.Checked;
+
+            gridFilter();
+            if (!i_CheckBox.Checked)
+            {
+                i_DatePicker.Value = DateTime.Now;
+            }
+
         }
 
         private void checkBoxPostDateFilter_CheckedChanged(object sender, EventArgs e)
@@ -298,22 +299,18 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
             }
         }
 
-        private void dateTimePickerPostDate_ValueChanged(object sender, EventArgs e)
-        {
-            gridFilter();
-        }
-
-        private void dateTimePickerEventStartDate_ValueChanged(object sender, EventArgs e)
-        {
-            gridFilter();
-        }
-
         private void buttonGoToURL_Click(object sender, EventArgs e)
         {
             int rowIndex = dataGridViewPosts.CurrentCell.RowIndex;
 
             System.Diagnostics.Process.Start(((List<ApplicationPost>)dataGridViewPosts.DataSource)[rowIndex].Link);
         }
+
+        private void filterField_ValueChange(object sender, EventArgs e)
+        {
+            gridFilter();
+        }
+
     }
 
 }

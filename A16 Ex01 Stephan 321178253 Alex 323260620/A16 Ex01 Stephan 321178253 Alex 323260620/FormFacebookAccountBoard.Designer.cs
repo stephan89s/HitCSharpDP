@@ -44,6 +44,7 @@
             this.tabPageEvents = new System.Windows.Forms.TabPage();
             this.dataGridViewEvents = new System.Windows.Forms.DataGridView();
             this.groupBoxEventsFilter = new System.Windows.Forms.GroupBox();
+            this.checkBoxEventStartDateFilter = new System.Windows.Forms.CheckBox();
             this.dateTimePickerEventStartDate = new System.Windows.Forms.DateTimePicker();
             this.labelMessage = new System.Windows.Forms.Label();
             this.labelName = new System.Windows.Forms.Label();
@@ -52,14 +53,13 @@
             this.tabPagePosts = new System.Windows.Forms.TabPage();
             this.dataGridViewPosts = new System.Windows.Forms.DataGridView();
             this.groupBoxPostFilters = new System.Windows.Forms.GroupBox();
+            this.checkBoxPostDateFilter = new System.Windows.Forms.CheckBox();
             this.dateTimePickerPostDate = new System.Windows.Forms.DateTimePicker();
             this.labelContentFilter = new System.Windows.Forms.Label();
             this.labelNameFilter = new System.Windows.Forms.Label();
             this.textBoxPostMessageFilter = new System.Windows.Forms.TextBox();
             this.textBoxPostFromFilter = new System.Windows.Forms.TextBox();
             this.tabControlShowMoreInfo = new System.Windows.Forms.TabControl();
-            this.checkBoxEventStartDateFilter = new System.Windows.Forms.CheckBox();
-            this.checkBoxPostDateFilter = new System.Windows.Forms.CheckBox();
             this.buttonGoToURL = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUserSmallPicture)).BeginInit();
             this.tabPageEvents.SuspendLayout();
@@ -249,6 +249,18 @@
             this.groupBoxEventsFilter.TabStop = false;
             this.groupBoxEventsFilter.Text = "Filters";
             // 
+            // checkBoxEventStartDateFilter
+            // 
+            this.checkBoxEventStartDateFilter.AutoSize = true;
+            this.checkBoxEventStartDateFilter.Location = new System.Drawing.Point(590, 34);
+            this.checkBoxEventStartDateFilter.Name = "checkBoxEventStartDateFilter";
+            this.checkBoxEventStartDateFilter.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.checkBoxEventStartDateFilter.Size = new System.Drawing.Size(93, 21);
+            this.checkBoxEventStartDateFilter.TabIndex = 6;
+            this.checkBoxEventStartDateFilter.Text = "Start Date";
+            this.checkBoxEventStartDateFilter.UseVisualStyleBackColor = true;
+            this.checkBoxEventStartDateFilter.CheckedChanged += new System.EventHandler(this.checkBoxEventStartDateFilter_CheckedChanged);
+            // 
             // dateTimePickerEventStartDate
             // 
             this.dateTimePickerEventStartDate.Enabled = false;
@@ -257,7 +269,7 @@
             this.dateTimePickerEventStartDate.Name = "dateTimePickerEventStartDate";
             this.dateTimePickerEventStartDate.Size = new System.Drawing.Size(163, 24);
             this.dateTimePickerEventStartDate.TabIndex = 4;
-            this.dateTimePickerEventStartDate.ValueChanged += new System.EventHandler(this.dateTimePickerEventStartDate_ValueChanged);
+            this.dateTimePickerEventStartDate.ValueChanged += new System.EventHandler(this.filterField_ValueChange);
             // 
             // labelMessage
             // 
@@ -288,7 +300,7 @@
             this.textBoxEventMessageFilter.Name = "textBoxEventMessageFilter";
             this.textBoxEventMessageFilter.Size = new System.Drawing.Size(185, 24);
             this.textBoxEventMessageFilter.TabIndex = 1;
-            this.textBoxEventMessageFilter.TextChanged += new System.EventHandler(this.textBoxEventMessageFilter_TextChanged);
+            this.textBoxEventMessageFilter.TextChanged += new System.EventHandler(this.filterField_ValueChange);
             // 
             // textBoxEventFromFilter
             // 
@@ -297,7 +309,7 @@
             this.textBoxEventFromFilter.Name = "textBoxEventFromFilter";
             this.textBoxEventFromFilter.Size = new System.Drawing.Size(191, 24);
             this.textBoxEventFromFilter.TabIndex = 0;
-            this.textBoxEventFromFilter.TextChanged += new System.EventHandler(this.textBoxEventFromFilter_TextChanged);
+            this.textBoxEventFromFilter.TextChanged += new System.EventHandler(this.filterField_ValueChange);
             // 
             // tabPagePosts
             // 
@@ -345,6 +357,18 @@
             this.groupBoxPostFilters.TabStop = false;
             this.groupBoxPostFilters.Text = "Filters";
             // 
+            // checkBoxPostDateFilter
+            // 
+            this.checkBoxPostDateFilter.AutoSize = true;
+            this.checkBoxPostDateFilter.Location = new System.Drawing.Point(593, 34);
+            this.checkBoxPostDateFilter.Name = "checkBoxPostDateFilter";
+            this.checkBoxPostDateFilter.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.checkBoxPostDateFilter.Size = new System.Drawing.Size(90, 21);
+            this.checkBoxPostDateFilter.TabIndex = 7;
+            this.checkBoxPostDateFilter.Text = "Post Date";
+            this.checkBoxPostDateFilter.UseVisualStyleBackColor = true;
+            this.checkBoxPostDateFilter.CheckedChanged += new System.EventHandler(this.checkBoxPostDateFilter_CheckedChanged);
+            // 
             // dateTimePickerPostDate
             // 
             this.dateTimePickerPostDate.Enabled = false;
@@ -353,7 +377,7 @@
             this.dateTimePickerPostDate.Name = "dateTimePickerPostDate";
             this.dateTimePickerPostDate.Size = new System.Drawing.Size(163, 24);
             this.dateTimePickerPostDate.TabIndex = 4;
-            this.dateTimePickerPostDate.ValueChanged += new System.EventHandler(this.dateTimePickerPostDate_ValueChanged);
+            this.dateTimePickerPostDate.ValueChanged += new System.EventHandler(this.filterField_ValueChange);
             // 
             // labelContentFilter
             // 
@@ -384,7 +408,7 @@
             this.textBoxPostMessageFilter.Name = "textBoxPostMessageFilter";
             this.textBoxPostMessageFilter.Size = new System.Drawing.Size(185, 24);
             this.textBoxPostMessageFilter.TabIndex = 1;
-            this.textBoxPostMessageFilter.TextChanged += new System.EventHandler(this.textBoxPostMessageFilter_TextChanged);
+            this.textBoxPostMessageFilter.TextChanged += new System.EventHandler(this.filterField_ValueChange);
             // 
             // textBoxPostFromFilter
             // 
@@ -393,7 +417,7 @@
             this.textBoxPostFromFilter.Name = "textBoxPostFromFilter";
             this.textBoxPostFromFilter.Size = new System.Drawing.Size(191, 24);
             this.textBoxPostFromFilter.TabIndex = 0;
-            this.textBoxPostFromFilter.TextChanged += new System.EventHandler(this.textBoxPostFromFilter_TextChanged);
+            this.textBoxPostFromFilter.TextChanged += new System.EventHandler(this.filterField_ValueChange);
             // 
             // tabControlShowMoreInfo
             // 
@@ -408,30 +432,6 @@
             this.tabControlShowMoreInfo.TabIndex = 22;
             this.tabControlShowMoreInfo.Visible = false;
             this.tabControlShowMoreInfo.SelectedIndexChanged += new System.EventHandler(this.dataGridViewTab_SelectedIndexChanged);
-            // 
-            // checkBoxEventStartDateFilter
-            // 
-            this.checkBoxEventStartDateFilter.AutoSize = true;
-            this.checkBoxEventStartDateFilter.Location = new System.Drawing.Point(590, 34);
-            this.checkBoxEventStartDateFilter.Name = "checkBoxEventStartDateFilter";
-            this.checkBoxEventStartDateFilter.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.checkBoxEventStartDateFilter.Size = new System.Drawing.Size(93, 21);
-            this.checkBoxEventStartDateFilter.TabIndex = 6;
-            this.checkBoxEventStartDateFilter.Text = "Start Date";
-            this.checkBoxEventStartDateFilter.UseVisualStyleBackColor = true;
-            this.checkBoxEventStartDateFilter.CheckedChanged += new System.EventHandler(this.checkBoxEventStartDateFilter_CheckedChanged);
-            // 
-            // checkBoxPostDateFilter
-            // 
-            this.checkBoxPostDateFilter.AutoSize = true;
-            this.checkBoxPostDateFilter.Location = new System.Drawing.Point(593, 34);
-            this.checkBoxPostDateFilter.Name = "checkBoxPostDateFilter";
-            this.checkBoxPostDateFilter.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.checkBoxPostDateFilter.Size = new System.Drawing.Size(90, 21);
-            this.checkBoxPostDateFilter.TabIndex = 7;
-            this.checkBoxPostDateFilter.Text = "Post Date";
-            this.checkBoxPostDateFilter.UseVisualStyleBackColor = true;
-            this.checkBoxPostDateFilter.CheckedChanged += new System.EventHandler(this.checkBoxPostDateFilter_CheckedChanged);
             // 
             // buttonGoToURL
             // 
@@ -448,7 +448,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(912, 364);
+            this.ClientSize = new System.Drawing.Size(912, 585);
             this.Controls.Add(this.buttonGoToURL);
             this.Controls.Add(this.buttonRefreshTable);
             this.Controls.Add(this.buttonLogOut);

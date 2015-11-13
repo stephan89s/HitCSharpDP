@@ -1,4 +1,5 @@
-﻿using FacebookWrapper;
+﻿using Facebook;
+using FacebookWrapper;
 using FacebookWrapper.ObjectModel;
 using System;
 using System.Collections.Generic;
@@ -14,16 +15,24 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
 {
     public partial class FormLogin : Form
     {
-        public LoginResult result { get; set; }
-        public bool isRememberedUsersOpen { get; set; }
+        public LoginResult result
+        {
+            get; set;
+        }
+        public bool isRememberedUsersOpen
+        {
+            get; set;
+        }
+        private ToolTip toolTip;
 
         public FormLogin()
         {
             InitializeComponent();
             AccountsStorage.Instance.UserConfigurationsAddedToStorage += this.AddAndRefreshRememberedUsersListBox;
             AccountsStorage.Instance.UserConfigurationsRemovedFromStorage += this.RemoveAndRefreshRememberedUsersListBox;
+            toolTip = new ToolTip();
             FacebookService.s_CollectionLimit = 100;
-          
+
         }
 
         private void buttonLogin_Click(object sender, EventArgs e)
@@ -37,7 +46,7 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
             {
                 logInNewUser();
             }
-            
+
         }
 
         private void InitAccountBoard()
@@ -57,27 +66,55 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
         private void AddAndRefreshRememberedUsersListBox(AccountsStorage.UserConfiguration i_UserConfiguration)
         {
             listBoxRememberedUsers.Items.Add(i_UserConfiguration);
+            if (AccountsStorage.Instance.StorageList.Count == 1)
+            {
+                buttonRememberedUsers.Enabled = true;
+            }
+            
         }
         private void RemoveAndRefreshRememberedUsersListBox(AccountsStorage.UserConfiguration i_UserConfiguration)
         {
             listBoxRememberedUsers.Items.Remove(i_UserConfiguration);
+            if (AccountsStorage.Instance.isStorageEmpty)
+            {
+               
+               
+            }
         }
 
         private void StoreLoggedInUserConfiguration()
         {
             string logedUserEMail = result.LoggedInUser.Email == null ? "No Email" : result.LoggedInUser.Email;
             string uniqName = string.Format("{0} ({1})", result.LoggedInUser.Name, logedUserEMail);
+            
             AccountsStorage.Instance.AddToStorage(uniqName, result.AccessToken);
-
+            if (listBoxRememberedUsers.Items.Count == 1)
+            {
+                buttonRememberedUsers.Enabled = true;
+            }
         }
         private void logInWithRememberedUser()
         {
             string knownAccsesToken = ((AccountsStorage.UserConfiguration)listBoxRememberedUsers.SelectedItem).AccessToken;
             if (knownAccsesToken != null)
             {
-                result = FacebookService.Connect(knownAccsesToken);
+                try
+                {
+
+                    result = FacebookService.Connect(knownAccsesToken);
+                }
+                catch (FacebookApiException ex)
+                {
+                    MessageBox.Show(this, ex.Message, "Ooops...", MessageBoxButtons.OK);
+                    AccountsStorage.Instance.RemoveFromStorage((AccountsStorage.UserConfiguration)listBoxRememberedUsers.SelectedItem);
+
+                }
             }
-            InitAccountBoard();
+            if (result != null)
+            {
+                InitAccountBoard();
+            }
+
         }
 
         private void logInNewUser()
@@ -89,9 +126,15 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
                 if (checkBoxRememberUser.Checked)
                 {
                     StoreLoggedInUserConfiguration();
+
                 }
+                InitAccountBoard();
             }
-            InitAccountBoard();
+            else
+            {
+                MessageBox.Show(result.ErrorMessage);
+            }
+
         }
         private void closeOrLogout(DialogResult i_facebookAccountResult)
         {
@@ -100,6 +143,7 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
             {
                 case DialogResult.Retry:
                 default:
+
                     Show();
                     break;
                 case DialogResult.Cancel:
@@ -117,19 +161,22 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
             {
 
                 Width += k_RememberUsersFormWidthChange;
-                isRememberedUsersOpen = true;
+
                 buttonRememberedUsers.Text = "<< Close Remembered Users";
+                checkBoxRememberUser.Checked = false;
 
             }
             else
             {
                 Width -= k_RememberUsersFormWidthChange;
-                isRememberedUsersOpen = false;
                 buttonRememberedUsers.Text = "Remembered Users >>";
             }
+            isRememberedUsersOpen = !isRememberedUsersOpen;
+            checkBoxRememberUser.Enabled = !checkBoxRememberUser.Enabled;
+
         }
-      
-        
+
+
 
         protected override void OnClosed(EventArgs e)
         {
@@ -140,15 +187,30 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
         {
             base.OnLoad(e);
             AccountsStorage.Instance.LoadFromFile();
-            foreach (var userConfig in AccountsStorage.Instance.StorageList)
+            if (AccountsStorage.Instance.isStorageEmpty)
             {
-                AddAndRefreshRememberedUsersListBox(userConfig);
+                buttonRememberedUsers.Enabled = false;
+
             }
+            else
+            {
+                foreach (var userConfig in AccountsStorage.Instance.StorageList)
+                {
+                    AddAndRefreshRememberedUsersListBox(userConfig);
+                }
+            }
+
+
         }
 
         private void buttonDeletFromUsersList_Click(object sender, EventArgs e)
         {
             AccountsStorage.Instance.RemoveFromStorage((AccountsStorage.UserConfiguration)listBoxRememberedUsers.SelectedItem);
+            if (AccountsStorage.Instance.isStorageEmpty)
+            {
+                buttonRememberedUsers.PerformClick();
+                buttonRememberedUsers.Enabled = false;
+            }
 
         }
 
@@ -165,6 +227,8 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
         {
             logInWithRememberedUser();
         }
+
+        
     }
 
 }
