@@ -71,7 +71,7 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
             int rowIndex = dataGridViewPosts.CurrentCell.RowIndex;
             string ItemID = ((List<ApplicationPost>)dataGridViewPosts.DataSource)[rowIndex].GetPublishedItemID();
 
-            foreach (var post in LoggedInUser.Posts)
+            foreach (var post in LoggedInUser.WallPosts)
             {
                 if (post.Id.Equals(ItemID))
                 {
@@ -84,8 +84,8 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
 
             }
             buttonGoToURL.Enabled = !string.IsNullOrEmpty(((List<ApplicationPost>)dataGridViewPosts.DataSource)[rowIndex].Link);
-            buttonComments.Enabled = SelectedGridItemCommentsList.Count > 0 ? true : false;
-            buttonComments.Text = string.Format("Comments ({0})", SelectedGridItemCommentsList.Count);
+            buttonCommentsStatistics.Enabled = SelectedGridItemCommentsList.Count > 0 ? true : false;
+            buttonCommentsStatistics.Text = string.Format("Comments ({0})", SelectedGridItemCommentsList.Count);
         }
 
 
@@ -116,23 +116,20 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
 
         private void InitializeAccountBoard()
         {
-            showAccountBoardStartPageInfo();
+            showFriendsList();
             showPostsOnForm();
             showEventsOnForm();
         }
-        private void showAccountBoardStartPageInfo()
+        private void showFriendsList()
         {
             pictureBoxUserSmallPicture.LoadAsync(LoggedInUser.PictureNormalURL);
             labelUserName.Text = LoggedInUser.Name;
             listBoxFriends.Items.Clear();
-            listBoxCheckIns.Items.Clear();
+            listBoxFriends.DisplayMember = nameof(User.Name);
+            string g = nameof(Checkin.Name);
             foreach (User friend in LoggedInUser.Friends)
             {
-                listBoxFriends.Items.Add(friend.Name);
-            }
-            foreach (Checkin checkin in LoggedInUser.Checkins)
-            {
-                listBoxCheckIns.Items.Add(checkin.Place.Name);
+                listBoxFriends.Items.Add(friend);
             }
         }
 
@@ -140,7 +137,7 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
         private void showPostsOnForm()
         {
             AppPostsList.Clear();
-            foreach (var post in LoggedInUser.Posts)
+            foreach (var post in LoggedInUser.WallPosts)
             {
                 AppPostsList.Add(new ApplicationPost(post));
 
@@ -162,23 +159,40 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
 
         }
 
-        private void buttonComments_Click(object sender, EventArgs e)
+        private void buttonCommentsStatistics_Click(object sender, EventArgs e)
         {
+            if (tabControlShowMoreInfo.SelectedTab.Name.Equals(tabPagePosts.Name))
+            {
+                new FormCommentList(SelectedGridItemCommentsList).ShowDialog();
+            }
+            else if (tabControlShowMoreInfo.SelectedTab.Name.Equals(tabPageEvents.Name))
+            {
+                new FormEventsStatistics(AppEventsList.ConvertAll(post => (ApplicationEvent)(post))).ShowDialog();
+            }
 
-            new FormCommentList(SelectedGridItemCommentsList).ShowDialog();
 
         }
 
 
         private void dataGridViewTab_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (tabControlShowMoreInfo.SelectedTab.Name.Equals("tabPageEvents"))
+            if (tabControlShowMoreInfo.SelectedTab.Name.Equals(tabPageEvents.Name))
             {
-                buttonComments.Visible = false;
+
+                buttonCommentsStatistics.Text = "7 Days Statistics";
+                buttonCommentsStatistics.Enabled = AppEventsList.Count != 0;
             }
-            else if (tabControlShowMoreInfo.SelectedTab.Name.Equals("tabPagePosts"))
+            else if (tabControlShowMoreInfo.SelectedTab.Name.Equals(tabPagePosts.Name))
             {
-                buttonComments.Visible = true;
+
+                dataGridViewPosts.ClearSelection();
+                dataGridViewPosts.FirstDisplayedScrollingRowIndex = 0;
+                SelectedGridItemCommentsList.Clear();
+                buttonCommentsStatistics.Text = "Comments (0)";
+                buttonCommentsStatistics.Enabled = false;
+
+
+
             }
 
 
@@ -310,6 +324,29 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
         {
             gridFilter();
         }
+
+        private void listBoxFriends_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBoxFriends.SelectedItems.Count == 1)
+            {
+                if (((User)listBoxFriends.SelectedItem).PictureNormalURL != null)
+                {
+                    pictureBoxFriendsPic.LoadAsync(((User)listBoxFriends.SelectedItem).PictureNormalURL);
+
+                }
+                else
+                {
+                    pictureBoxFriendsPic.Image = pictureBoxFriendsPic.ErrorImage;
+                }
+            }
+        }
+
+        private void listBoxFriends_Leave(object sender, EventArgs e)
+        {
+            pictureBoxFriendsPic.Image = null;
+
+        }
+
 
     }
 

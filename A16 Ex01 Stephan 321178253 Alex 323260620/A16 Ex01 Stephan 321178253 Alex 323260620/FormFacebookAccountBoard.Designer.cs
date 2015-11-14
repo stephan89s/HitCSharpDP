@@ -29,11 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormFacebookAccountBoard));
-            this.labelCheckIns = new System.Windows.Forms.Label();
-            this.listBoxCheckIns = new System.Windows.Forms.ListBox();
-            this.buttonComments = new System.Windows.Forms.Button();
+            this.buttonCommentsStatistics = new System.Windows.Forms.Button();
             this.buttonShowMoreInfo = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.listBoxFriends = new System.Windows.Forms.ListBox();
             this.buttonPostStatus = new System.Windows.Forms.Button();
             this.textBoxPostStatus = new System.Windows.Forms.TextBox();
@@ -61,6 +58,8 @@
             this.textBoxPostFromFilter = new System.Windows.Forms.TextBox();
             this.tabControlShowMoreInfo = new System.Windows.Forms.TabControl();
             this.buttonGoToURL = new System.Windows.Forms.Button();
+            this.pictureBoxFriendsPic = new System.Windows.Forms.PictureBox();
+            this.groupBoxFriends = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUserSmallPicture)).BeginInit();
             this.tabPageEvents.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEvents)).BeginInit();
@@ -69,81 +68,53 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPosts)).BeginInit();
             this.groupBoxPostFilters.SuspendLayout();
             this.tabControlShowMoreInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFriendsPic)).BeginInit();
+            this.groupBoxFriends.SuspendLayout();
             this.SuspendLayout();
             // 
-            // labelCheckIns
+            // buttonCommentsStatistics
             // 
-            this.labelCheckIns.AutoSize = true;
-            this.labelCheckIns.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelCheckIns.Location = new System.Drawing.Point(456, 20);
-            this.labelCheckIns.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelCheckIns.Name = "labelCheckIns";
-            this.labelCheckIns.Size = new System.Drawing.Size(110, 30);
-            this.labelCheckIns.TabIndex = 29;
-            this.labelCheckIns.Text = "Checkins";
-            // 
-            // listBoxCheckIns
-            // 
-            this.listBoxCheckIns.FormattingEnabled = true;
-            this.listBoxCheckIns.ItemHeight = 16;
-            this.listBoxCheckIns.Location = new System.Drawing.Point(404, 54);
-            this.listBoxCheckIns.Margin = new System.Windows.Forms.Padding(4);
-            this.listBoxCheckIns.Name = "listBoxCheckIns";
-            this.listBoxCheckIns.Size = new System.Drawing.Size(209, 164);
-            this.listBoxCheckIns.TabIndex = 28;
-            // 
-            // buttonComments
-            // 
-            this.buttonComments.Enabled = false;
-            this.buttonComments.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonComments.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonComments.Location = new System.Drawing.Point(13, 692);
-            this.buttonComments.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonComments.Name = "buttonComments";
-            this.buttonComments.Size = new System.Drawing.Size(139, 28);
-            this.buttonComments.TabIndex = 24;
-            this.buttonComments.Text = "Comments (0)";
-            this.buttonComments.UseVisualStyleBackColor = true;
-            this.buttonComments.Click += new System.EventHandler(this.buttonComments_Click);
+            this.buttonCommentsStatistics.Enabled = false;
+            this.buttonCommentsStatistics.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonCommentsStatistics.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonCommentsStatistics.Location = new System.Drawing.Point(293, 629);
+            this.buttonCommentsStatistics.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonCommentsStatistics.Name = "buttonCommentsStatistics";
+            this.buttonCommentsStatistics.Size = new System.Drawing.Size(161, 28);
+            this.buttonCommentsStatistics.TabIndex = 24;
+            this.buttonCommentsStatistics.Text = "Comments (0)";
+            this.buttonCommentsStatistics.UseVisualStyleBackColor = true;
+            this.buttonCommentsStatistics.Click += new System.EventHandler(this.buttonCommentsStatistics_Click);
             // 
             // buttonShowMoreInfo
             // 
             this.buttonShowMoreInfo.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonShowMoreInfo.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonShowMoreInfo.Location = new System.Drawing.Point(13, 320);
+            this.buttonShowMoreInfo.Location = new System.Drawing.Point(78, 236);
             this.buttonShowMoreInfo.Margin = new System.Windows.Forms.Padding(4);
             this.buttonShowMoreInfo.Name = "buttonShowMoreInfo";
-            this.buttonShowMoreInfo.Size = new System.Drawing.Size(886, 32);
+            this.buttonShowMoreInfo.Size = new System.Drawing.Size(752, 32);
             this.buttonShowMoreInfo.TabIndex = 21;
             this.buttonShowMoreInfo.Text = "⇊  ⇊  ShowMoreInfo  ⇊  ⇊";
             this.buttonShowMoreInfo.UseVisualStyleBackColor = true;
             this.buttonShowMoreInfo.Click += new System.EventHandler(this.buttonShowMoreInfo_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(252, 21);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(93, 30);
-            this.label1.TabIndex = 20;
-            this.label1.Text = "Friends";
-            // 
             // listBoxFriends
             // 
             this.listBoxFriends.FormattingEnabled = true;
-            this.listBoxFriends.ItemHeight = 16;
-            this.listBoxFriends.Location = new System.Drawing.Point(216, 54);
+            this.listBoxFriends.ItemHeight = 20;
+            this.listBoxFriends.Location = new System.Drawing.Point(101, 22);
             this.listBoxFriends.Margin = new System.Windows.Forms.Padding(4);
             this.listBoxFriends.Name = "listBoxFriends";
-            this.listBoxFriends.Size = new System.Drawing.Size(177, 164);
+            this.listBoxFriends.Size = new System.Drawing.Size(231, 84);
             this.listBoxFriends.TabIndex = 19;
+            this.listBoxFriends.SelectedIndexChanged += new System.EventHandler(this.listBoxFriends_SelectedIndexChanged);
+            this.listBoxFriends.Leave += new System.EventHandler(this.listBoxFriends_Leave);
             // 
             // buttonPostStatus
             // 
             this.buttonPostStatus.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonPostStatus.Location = new System.Drawing.Point(756, 250);
+            this.buttonPostStatus.Location = new System.Drawing.Point(737, 148);
             this.buttonPostStatus.Margin = new System.Windows.Forms.Padding(4);
             this.buttonPostStatus.Name = "buttonPostStatus";
             this.buttonPostStatus.Size = new System.Drawing.Size(143, 62);
@@ -154,28 +125,28 @@
             // 
             // textBoxPostStatus
             // 
-            this.textBoxPostStatus.Location = new System.Drawing.Point(13, 250);
+            this.textBoxPostStatus.Location = new System.Drawing.Point(216, 148);
             this.textBoxPostStatus.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxPostStatus.Multiline = true;
             this.textBoxPostStatus.Name = "textBoxPostStatus";
             this.textBoxPostStatus.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxPostStatus.Size = new System.Drawing.Size(733, 61);
+            this.textBoxPostStatus.Size = new System.Drawing.Size(522, 62);
             this.textBoxPostStatus.TabIndex = 17;
             // 
             // labelUserName
             // 
             this.labelUserName.AutoSize = true;
-            this.labelUserName.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelUserName.Location = new System.Drawing.Point(34, 22);
+            this.labelUserName.Font = new System.Drawing.Font("Tahoma", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelUserName.Location = new System.Drawing.Point(20, 5);
             this.labelUserName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelUserName.Name = "labelUserName";
-            this.labelUserName.Size = new System.Drawing.Size(134, 30);
+            this.labelUserName.Size = new System.Drawing.Size(120, 27);
             this.labelUserName.TabIndex = 16;
             this.labelUserName.Text = "User Name";
             // 
             // pictureBoxUserSmallPicture
             // 
-            this.pictureBoxUserSmallPicture.Location = new System.Drawing.Point(13, 54);
+            this.pictureBoxUserSmallPicture.Location = new System.Drawing.Point(13, 45);
             this.pictureBoxUserSmallPicture.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBoxUserSmallPicture.Name = "pictureBoxUserSmallPicture";
             this.pictureBoxUserSmallPicture.Size = new System.Drawing.Size(179, 165);
@@ -424,7 +395,7 @@
             this.tabControlShowMoreInfo.Controls.Add(this.tabPagePosts);
             this.tabControlShowMoreInfo.Controls.Add(this.tabPageEvents);
             this.tabControlShowMoreInfo.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControlShowMoreInfo.Location = new System.Drawing.Point(13, 360);
+            this.tabControlShowMoreInfo.Location = new System.Drawing.Point(13, 276);
             this.tabControlShowMoreInfo.Margin = new System.Windows.Forms.Padding(4);
             this.tabControlShowMoreInfo.Name = "tabControlShowMoreInfo";
             this.tabControlShowMoreInfo.SelectedIndex = 0;
@@ -436,29 +407,46 @@
             // buttonGoToURL
             // 
             this.buttonGoToURL.Enabled = false;
-            this.buttonGoToURL.Location = new System.Drawing.Point(179, 692);
+            this.buttonGoToURL.Location = new System.Drawing.Point(17, 629);
             this.buttonGoToURL.Name = "buttonGoToURL";
-            this.buttonGoToURL.Size = new System.Drawing.Size(139, 28);
+            this.buttonGoToURL.Size = new System.Drawing.Size(158, 28);
             this.buttonGoToURL.TabIndex = 31;
             this.buttonGoToURL.Text = "Go To URL";
             this.buttonGoToURL.UseVisualStyleBackColor = true;
             this.buttonGoToURL.Click += new System.EventHandler(this.buttonGoToURL_Click);
             // 
+            // pictureBoxFriendsPic
+            // 
+            this.pictureBoxFriendsPic.Location = new System.Drawing.Point(6, 22);
+            this.pictureBoxFriendsPic.Name = "pictureBoxFriendsPic";
+            this.pictureBoxFriendsPic.Size = new System.Drawing.Size(88, 88);
+            this.pictureBoxFriendsPic.TabIndex = 32;
+            this.pictureBoxFriendsPic.TabStop = false;
+            // 
+            // groupBoxFriends
+            // 
+            this.groupBoxFriends.Controls.Add(this.pictureBoxFriendsPic);
+            this.groupBoxFriends.Controls.Add(this.listBoxFriends);
+            this.groupBoxFriends.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.groupBoxFriends.Location = new System.Drawing.Point(216, 24);
+            this.groupBoxFriends.Name = "groupBoxFriends";
+            this.groupBoxFriends.Size = new System.Drawing.Size(338, 117);
+            this.groupBoxFriends.TabIndex = 33;
+            this.groupBoxFriends.TabStop = false;
+            this.groupBoxFriends.Text = "Friends";
+            // 
             // FormFacebookAccountBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(912, 585);
+            this.ClientSize = new System.Drawing.Size(912, 699);
+            this.Controls.Add(this.groupBoxFriends);
             this.Controls.Add(this.buttonGoToURL);
             this.Controls.Add(this.buttonRefreshTable);
             this.Controls.Add(this.buttonLogOut);
-            this.Controls.Add(this.labelCheckIns);
-            this.Controls.Add(this.listBoxCheckIns);
-            this.Controls.Add(this.buttonComments);
+            this.Controls.Add(this.buttonCommentsStatistics);
             this.Controls.Add(this.tabControlShowMoreInfo);
             this.Controls.Add(this.buttonShowMoreInfo);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.listBoxFriends);
             this.Controls.Add(this.buttonPostStatus);
             this.Controls.Add(this.textBoxPostStatus);
             this.Controls.Add(this.labelUserName);
@@ -477,18 +465,16 @@
             this.groupBoxPostFilters.ResumeLayout(false);
             this.groupBoxPostFilters.PerformLayout();
             this.tabControlShowMoreInfo.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFriendsPic)).EndInit();
+            this.groupBoxFriends.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label labelCheckIns;
-        private System.Windows.Forms.ListBox listBoxCheckIns;
-        private System.Windows.Forms.Button buttonComments;
+        private System.Windows.Forms.Button buttonCommentsStatistics;
         private System.Windows.Forms.Button buttonShowMoreInfo;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox listBoxFriends;
         private System.Windows.Forms.Button buttonPostStatus;
         private System.Windows.Forms.TextBox textBoxPostStatus;
@@ -516,5 +502,7 @@
         private System.Windows.Forms.CheckBox checkBoxEventStartDateFilter;
         private System.Windows.Forms.CheckBox checkBoxPostDateFilter;
         private System.Windows.Forms.Button buttonGoToURL;
+        private System.Windows.Forms.PictureBox pictureBoxFriendsPic;
+        private System.Windows.Forms.GroupBox groupBoxFriends;
     }
 }

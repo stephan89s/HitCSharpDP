@@ -107,7 +107,7 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
                 {
                     MessageBox.Show(this, ex.Message, "Ooops...", MessageBoxButtons.OK);
                     AccountsStorage.Instance.RemoveFromStorage((AccountsStorage.UserConfiguration)listBoxRememberedUsers.SelectedItem);
-
+                    result = null;
                 }
             }
             if (result != null)
@@ -119,7 +119,7 @@ namespace A16_Ex01_Stephan_321178253_Alex_323260620
 
         private void logInNewUser()
         {
-            result = FacebookService.Login("909882489077378", "user_birthday", "email", "user_hometown", "user_about_me", "user_photos", "publish_actions", "user_status", "user_tagged_places", "user_friends", "user_likes");
+            result = FacebookService.Login("909882489077378", "user_birthday", "email", "user_hometown", "user_about_me", "user_photos", "publish_actions", "user_status", "user_tagged_places", "user_friends", "user_posts", "user_events");
             if (!string.IsNullOrEmpty(result.AccessToken))
             {
 
